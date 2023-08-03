@@ -16,27 +16,22 @@ import { FilterMatchMode } from 'primereact/api';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 
 
-const Enquire = () => {
+const Orders = () => {
     const [userList, setUserList] = useState([{
         id: uuid(),
-        title: 'Enquire regarding sample brouchers',
-        description: 'Enquire,iYou might enquire, or ask about, the difference between the words enquire and "inquire." Good question. The answer is, not much. They are the same word with different spellings. Typically the British prefer the "e" version, but both are correct.nquire (rather formal) to ask somebody for information: I called the station to enquire about train times.',
-        status: 'Open',        
-        deadline: '27-Jul-2023'
+        title: 'Need pamphlet',
+        description: 'Before you can begin to determine what the composition of a particular paragraph will be, you must first decide on an argument and a working thesis statement for your paper. What is the most important idea that you are trying to convey to your reader? The information in each paragraph must be related to that idea. In other words, your paragraphs should remind your reader that there is a recurrent relationship between your thesis.',
+        orderid: '102',
+        orderdate: '27-Jul-2023',
+        amount: '12000',
+        paidamount: '7500',
+        balanceamount: '4500'
     }]);
-   
-    const adminStatus = [
-        { name: 'All', code: '' },
-        { name: 'Open', code: 'Open' },
-        { name: 'Closed', code: 'Closed' },
-        { name: 'Accepted', code: 'Accepted' }
-    ];
+    
+  
     const [filters, setFilters] = useState({
         title: { value: '', matchMode: FilterMatchMode.CONTAINS },
-        description: { value: '', matchMode: FilterMatchMode.CONTAINS },        
-        deadline: { value: '', matchMode: FilterMatchMode.EQUALS },
-        status: { value: '', matchMode: FilterMatchMode.EQUALS }
-        
+        orderid: { value: '', matchMode: FilterMatchMode.CONTAINS }
     });
     const toast = useRef(null);
     const dt = useRef(null);
@@ -51,7 +46,7 @@ const Enquire = () => {
     };
     const confirm = (id) => {
         confirmDialog({
-            message: 'Do you want to delete this Enquire?',
+            message: 'Do you want to delete this Order?',
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
@@ -59,31 +54,31 @@ const Enquire = () => {
             reject: () => rejectFunc()
         });
     };
+
+    const paymentstatus = [
+        { name: 'All', code: '' },
+        { name: 'Paid', code: 'Paid' },
+        { name: 'Pending', code: 'Pending' }
+    ];
+
     const initFilters = () => {
         setFilters({
             title: { value: '', matchMode: FilterMatchMode.CONTAINS },
-            description: { value: '', matchMode: FilterMatchMode.CONTAINS },
-            deadline: { value: '', matchMode: FilterMatchMode.EQUALS },
-            status: { value: '', matchMode: FilterMatchMode.CONTAINS }
-         
-            // userStatus: { value: '', matchMode: FilterMatchMode.EQUALS }
+            orderid: { value: '', matchMode: FilterMatchMode.CONTAINS }
         });
     };
     const headerTemplate = () => {
         return (
             <div className='mx-2'>
                 <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center mt-1">
-                    <h5 className="m-0">Enquires</h5>
-                    {/* <span className="block mt-2 md:mt-0 p-input-icon-left">
-                        <Button icon="pi pi-plus" severity="success" className="mr-2" tooltip="Add Admin" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/admin/new')} />
-                    </span> */}
+                    <h5 className="m-0">My Orders</h5>                    
                 </div>
                 <hr />
                 <div className='grid mt-3'>
                     <div className="field col-12 md:col-2">
                         <span className="p-float-label">
                             <InputText
-                                id="searchName"
+                                id="title"
                                 keyfilter={/^[^<>*!]+$/}
                                 className='w-full'
                                 autoComplete='off'
@@ -91,45 +86,15 @@ const Enquire = () => {
                                 onChange={(e) => setFilters({ ...filters, title: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
                                 onKeyDown={(e) => setFilters({ ...filters, title: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
                             />
-                            <label htmlFor="searchName">Search by Name</label>
+                            <label htmlFor="title">Search by Title</label>
                         </span>
-                    </div>
+                    </div>                    
                     {/* <div className="field col-12 md:col-2">
                         <span className="p-float-label">
-                            <InputText
-                                keyfilter="pint"
-                                className='w-full'
-                                autoComplete='off'
-                                maxLength={10}
-                                value={filters.description.value}
-                                onChange={(e) => setFilters({ ...filters, description: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
-                                onKeyDown={(e) => setFilters({ ...filters, description: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
-                            />
-                            <label htmlFor="username">Search by Mobile</label>
-                        </span>
-                    </div> */}
-                    {/* <div className="field col-12 md:col-2">
-                        <span className="p-float-label">
-                            <InputText
-                                keyfilter="email"
-                                className='w-full'
-                                autoComplete='off'
-                            />
-                            <label htmlFor="username">Search by Email</label>
-                        </span>
-                    </div> */}
-                    {/* <div className="field col-12 md:col-2">
-                        <span className="p-float-label">
-                            <Dropdown id="dropdown" options={adminRole} value={filters.userRole.value} onChange={(e) => setFilters({ ...filters, userRole: { value: e.target.value, matchMode: FilterMatchMode.EQUALS } })} optionLabel="name" className='w-full' />
-                            <label htmlFor="dropdown">Select Role</label>
-                        </span>
-                    </div> */}
-                    <div className="field col-12 md:col-2">
-                        <span className="p-float-label">
-                            <Dropdown id="dropdown" options={adminStatus} value={filters.status.value} onChange={(e) => setFilters({ ...filters, status: { value: e.target.value, matchMode: FilterMatchMode.EQUALS } })} optionLabel="name" className='w-full' />
+                            <Dropdown id="dropdown" options={paymentstatus} value={filters.paymentstatus.value} onChange={(e) => setFilters({ ...filters, paymentstatus: { value: e.target.value, matchMode: FilterMatchMode.EQUALS } })} optionLabel="name" className='w-full' />
                             <label htmlFor="dropdown">Select Status</label>
                         </span>
-                    </div>
+                    </div> */}
                     <div className="field col-12 md:col-2">
                         <Button icon="pi pi-times" severity="danger" className="mx-1 inline-block" style={{ width: '45%' }} onClick={() => initFilters()} tooltip="Clear Search" tooltipOptions={{ position: 'top' }} />
                         {/* <Button icon="pi pi-upload" severity="help" className="mx-1 inline-block" style={{ width: '45%' }} onClick={exportExcel} disabled={selectedList.length === 0} tooltip="Export" tooltipOptions={{ position: 'top' }} /> */}
@@ -141,7 +106,7 @@ const Enquire = () => {
     const exportExcel = () => {
         const ExcelJS = require('exceljs');
         const wb = new ExcelJS.Workbook();
-        const sheet = wb.addWorksheet('Enquire', { views: [{ state: 'frozen', xSplit: 1, ySplit: 1 }] });
+        const sheet = wb.addWorksheet('Orders', { views: [{ state: 'frozen', xSplit: 1, ySplit: 1 }] });
         var borderStyles = { top: { style: "thin" }, left: { style: "thin" }, bottom: { style: "thin" }, right: { style: "thin" } };
         sheet.columns = [
             { header: '#', key: 'id' },
@@ -180,26 +145,25 @@ const Enquire = () => {
             const url = window.URL.createObjectURL(blob);
             const anchor = document.createElement('a');
             anchor.href = url;
-            anchor.download = `Enquires - ${moment(new Date()).format('DD-MM-YYYY HH:mm:ss')}.xlsx`;
+            anchor.download = `Admins List - ${moment(new Date()).format('DD-MM-YYYY HH:mm:ss')}.xlsx`;
             anchor.click();
             window.URL.revokeObjectURL(url);
         });
     };
     const status = (rowData) => {
-        return <Badge value={rowData.status} severity={rowData.status === 'Active' ? 'success' : 'danger'}></Badge>
+        return <Badge value={rowData.paymentstatus} severity={rowData.paymentstatus === 'Active' ? 'success' : 'danger'}></Badge>
     };
     const actions = (rowData) => {
         return (
             <>
                 <Toast ref={toast} />
                 <ConfirmDialog />
-                <Button icon="pi pi-eye" severity="primary" className="mr-1 w-auto h-auto" tooltip="View Enquire" tooltipOptions={{ position: 'top' }} text onClick={() => router.push(`/pages/enquire/${rowData.id}`)} />
-                {/* <Button icon="pi pi-trash" severity="danger" className="ml-1 w-auto h-auto" tooltip="Delete Admin" tooltipOptions={{ position: 'top' }} text onClick={() => confirm(rowData.id)} /> */}
+                <Button icon="pi pi-eye" severity="primary" className="mr-1 w-auto h-auto" tooltip="View Orders" tooltipOptions={{ position: 'top' }} text onClick={() => router.push(`/pages/orders/${rowData.id}`)} />                
             </>
         )
     };
     const emptyMessage = () => {
-        return <h5 className='text-center pt-1' style={{ fontSize: '1em' }}>No Enquire to Display</h5>
+        return <h5 className='text-center pt-1' style={{ fontSize: '1em' }}>No Orders to Display</h5>
     };
     const footerTemplate = {
         layout: 'RowsPerPageDropdown CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
@@ -213,7 +177,7 @@ const Enquire = () => {
             );
         },
         CurrentPageReport: (options) => {
-            const name = (options.totalRecords > 1) ? 'Enquire' : 'Enquire'
+            const name = (options.totalRecords > 1) ? 'Orders' : 'Orders'
             return (
                 <div className='center_item'>
                     <span style={{ color: 'var(--text-color)', userSelect: 'none', width: 'auto', textAlign: 'center' }}>
@@ -273,7 +237,7 @@ const Enquire = () => {
             setLoaded(true);
             setLoaded(false);
         }
-        document.title = 'Enquires | NAC Vendor';
+        document.title = 'My Orders | NAC Vendor';
         getData();
     }, []);
 
@@ -290,21 +254,37 @@ const Enquire = () => {
                     className='text-center' exportable={false}
                 />
                 <Column
-                    header='Title' headerStyle={{ 'minWidth': '10%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
+                    header='Title' headerStyle={{ 'minWidth': '60%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
                     field='title' filterField="title" className='text-start'
                 />
                 <Column
-                    header='Description' headerStyle={{ width: '40%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
+                    header='Description' headerStyle={{ width: '60%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
                     field='description' filterField="description" className='text-end'
-                />               
+                />
                 <Column
-                    header='Deadline' headerStyle={{ width: '8%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='deadline' filterField="deadline" className='text-center'
+                    header='Order Id' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
+                    field='orderid' filterField="orderid" className='text-start'
                 />
-                 <Column
-                    header='Status' headerStyle={{ width: '8%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='status' filterField="status" className='text-center'
+                <Column
+                    header='Order Date' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
+                    field='orderdate' filterField="orderdate" className='text-start'
                 />
+                <Column
+                    header='Quotation Amount' headerStyle={{ width: '1%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
+                    field='amount' filterField="amount" className='text-center'
+                />
+                <Column
+                    header='Paid Amount' headerStyle={{ width: '1%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
+                    field='paidamount' filterField="paidamount" className='text-center'
+                />
+                <Column
+                    header='Balance Amount' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
+                    field='balanceamount' filterField="balanceamount" className='text-center'
+                />
+                {/* <Column
+                    header='Payment Status' headerStyle={{ width: '1%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
+                    field='paymentstatus' body={status} filterField="paymentstatus" className='text-center'
+                />                 */}
                 <Column
                     header='Actions' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }}
                     body={actions} className='text-center' exportable={false}
@@ -314,4 +294,4 @@ const Enquire = () => {
     );
 };
 
-export default Enquire;
+export default Orders;

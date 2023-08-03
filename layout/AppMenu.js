@@ -6,12 +6,13 @@ const AppMenu = () => {
     const model = [
         {
             items: [
-                { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/', id: 'navDashboard' },
-                { label: 'Admin Lists', icon: 'pi pi-fw pi-user', to: '/pages/admin', id: 'navAdmin' },
+                // { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/', id: 'navDashboard' },
+                // { label: 'Admin Lists', icon: 'pi pi-fw pi-user', to: '/pages/admin', id: 'navAdmin' },
                 { label: 'Login', icon: 'pi pi-fw pi-user', to: '/pages/login', id: 'navLogin' },
-                { label: 'Forgot Password', icon: 'pi pi-fw pi-user', to: '/pages/forgot_password', id: 'navForgotpass' },
-                { label: 'OTP Page', icon: 'pi pi-fw pi-user', to: '/pages/otp', id: 'navOtp' },
-                { label: 'Enquire List', icon: 'pi pi-fw pi-user', to: '/pages/enquire', id: 'navEnquirep' }
+                // { label: 'Forgot Password', icon: 'pi pi-fw pi-user', to: '/pages/forgot_password', id: 'navForgotpass' },
+                { label: 'Enquires', icon: 'pi pi-fw pi-list', to: '/pages/enquire', id: 'navEnquire' },
+                { label: 'My Orders', icon: 'pi pi-fw pi-compass', to: '/pages/orders', id: 'navOrder' },
+                // { label: 'Payment List', icon: 'pi pi-fw pi-dollar', to: '/pages/payment', id: 'navPayment' }
             ]
         },
         {

@@ -8,18 +8,17 @@ import { Password } from 'primereact/password';
 import { Divider } from 'primereact/divider';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
+import { FileUpload } from 'primereact/fileupload';
+import { Toolbar } from 'primereact/toolbar';
 
-export default function Admin() {
+export default function Enquire() {
     const router = useRouter();
-    const { admin } = router.query;
-    const page = admin === 'new' ? 'Add Admin' : 'Edit Enquire';
+    const { enquire } = router.query;
+    const page = enquire === 'new' ? 'Add Admin' : 'Enquire Details';
     const [value, setValue] = useState('');
-    const [enquireList, setEnquireList] = useState({ id: uuid(), userName: '', userPassword: '', userMobile: '', userEmail: '', userRole: '', userStatus: '', createdOn: '' });
+    const [enquireList, setEnquireList] = useState({ id: uuid(), amount: '', quotation: '', status: '' });
     const toast = useRef(null);
-    const adminRole = [
-        { name: 'Super Admin', code: 'Super Admin' },
-        { name: 'Admin', code: 'Admin' }
-    ];
+    const [file, setFile] = useState('');
     const adminStatus = [
         { name: 'Active', code: 'Active' },
         { name: 'Inactive', code: 'Inactive' }
@@ -44,159 +43,109 @@ export default function Admin() {
         const { id, value } = event.target;
         setEnquireList({ ...enquireList, [id]: value })
     };
+    const customBase64Uploader = async (event) => {
+        // convert file to base64 encoded        
+        console.log(event.files.length);
+        if (event.files.length > 0) {
+            const files = event.files[0];
+            const size = files.size / 1024;
+            const type = files.type;
+            const fileName = enquireList.id + "." + type.split('/')[1];
+            if (size > 250) { toast('File size should not be greater than 250 KB'); }
+            else if (!type.includes('pdf')) { toast('File type format should be pdf'); }
+            else {
+                setFile(files);
+                setEnquireList({ ...enquireList, ['quotation']: fileName });
+            }
+        }
+
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (!enquireList.userName) { toastAlert('Enter User Name'); }
-        else if (!enquireList.userMobile) { toastAlert('Enter Mobile Number'); }
-        else if (!enquireList.userMobile.length !== 10 ) { toastAlert('Enter Valid Mobile Number'); }
-        else if (!enquireList.userEmail) { toastAlert('Enter EMail Address'); }
-        else if (!enquireList.userRole) { toastAlert('Select Role'); }
-        else if (!enquireList.userStatus) { toastAlert('Select Status'); }
+        console.log(enquireList, "fffff")
+        if (!enquireList.amount) { toastAlert('Enter the amount'); }
+        else if (!enquireList.quotation) { toastAlert('Upload the quotation'); }
     };
+
+
+
+    const exportCSV = () => {
+        dt.current.exportCSV();
+    };
+
+    const rightToolbarTemplate = () => {
+        return (
+            <React.Fragment>
+                <FileUpload mode="basic" accept="image/*" maxFileSize={1000000} label="Import" chooseLabel="Import" className="mr-2 inline-block" />
+            </React.Fragment>
+        );
+    };
+
+
     useEffect(() => {
         document.title = page + ' | NAC Vendor';
-        document.getElementById('navAdmin').classList.add('active-route');
+        document.getElementById('navEnquire').classList.add('active-route');
     }, []);
     return (
-        <form method='POST' onSubmit={handleSubmit}>
-            <Toast ref={toast} />
-            <div className='card'>
-                <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                    <h5 className="m-0">{page}</h5>
-                    <span className="block md:mt-0 p-input-icon-left">
-                        <Button icon={`pi pi-${admin === 'new' ? 'plus' : 'pencil'}`} severity="success" className="mr-1" tooltip={page} tooltipOptions={{ position: 'top' }} disabled={false}/>
-                        <Button icon="pi pi-arrow-left" severity="danger" className="ml-1" tooltip="Go Back" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/enquire')} />
-                    </span>
-                </div>
-                <hr />
-                <div className="col-12 lg:col-8">
-                <div className="card">
-                    <h5>Inline</h5>
-                    <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                        <label htmlFor="username1" className="col-fixed w-9rem">
-                            Title
-                        </label>
-                        <InputText id="username1" value={enquireList.title} onChange={(e) => setTitle(e.target.value)}  className="p-invalid" disabled/>                       
-                    </div>
-                    <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                        <label htmlFor="email" className="col-fixed w-9rem">
-                            Description
-                        </label>
-                        <InputText id="email" value={enquireList.description}  onChange={(e) => setDescription(e.target.value)}  className="p-invalid" disabled/>                        
-                    </div>
-                    <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                        <label htmlFor="email" className="col-fixed w-9rem">
-                            Deadline
-                        </label>
-                        <InputText id="email" value={enquireList.deadline}  onChange={(e) => setDeadline(e.target.value)}  className="p-invalid" disabled/>                        
-                    </div>
-                    <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                        <label htmlFor="email" className="col-fixed w-9rem">
-                            Upload Quotation
-                        </label>
-                        <InputText id="email" value={enquireList.description}  onChange={(e) => setEmail(e.target.value)} required className="p-invalid" />                        
-                    </div>
-                    <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                        <label htmlFor="amount" className="col-fixed w-9rem">
-                            Amount
-                        </label>
-                        <InputText id="amount" value={enquireList.amount}  onChange={(e) => setAmount(e.target.value)} required className="p-invalid" />                        
-                    </div>
-                    <div className="flex align-items-center flex-wrap gap-2">
-                        <label htmlFor="email" className="col-fixed w-9rem">
-                            Enquire Status
-                        </label>
-                        <InputText id="status" value={enquireList.status}  onChange={(e) => setStatusl(e.target.value)}  className="p-invalid" disabled/>                        
-                    </div>
-                </div>
-            </div>
-                <div className='mt-3'>
-                    <div className="field col-12">
-                        <span className="p-float-label">
-                            <InputText
-                                id="userName"
-                                keyfilter={/^[a-zA-Z ]*$/}
-                                className='w-full'
-                                autoComplete='off'
-                                maxLength={50}
-                                value={enquireList.userName}
-                                onChange={handleChange} disabled
-                            />
-                            <label htmlFor="title">Title</label>
+        <>
+            {/* <Toolbar className="mb-4" l right={rightToolbarTemplate}></Toolbar> */}
+
+            <form method='POST' onSubmit={handleSubmit}>
+
+                <Toast ref={toast} />
+                <div className='card'>
+                    <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 className="m-0">{page}</h5>
+                        <span className="block md:mt-0 p-input-icon-left">
+                            <Button icon={`pi pi-${enquire === 'new' ? 'plus' : 'pencil'}`} severity="success" className="mr-1" tooltip={page} tooltipOptions={{ position: 'top' }} disabled={false} />
+                            <Button icon="pi pi-arrow-left" severity="danger" className="ml-1" tooltip="Go Back" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/enquire')} />
                         </span>
                     </div>
-                    <div className="field col-12">
-                        <span className="p-float-label">
-                            <InputText
-                                id="userMobile"
-                                keyfilter="pint"
-                                className='w-full'
-                                autoComplete='off'
-                                maxLength={10}
-                                value={enquireList.userMobile}
-                                onChange={handleChange} disabled
-                            />
-                            <label htmlFor="userMobile">Enter Mobile Number</label>
-                        </span>
-                    </div>
-                    <div className="field col-12">
-                        <span className="p-float-label">
-                            <InputText
-                                id="userEmail"
-                                keyfilter="email"
-                                className='w-full'
-                                autoComplete='off'
-                                maxLength={25}
-                                value={enquireList.userEmail}
-                                onChange={handleChange}
-                            />
-                            <label htmlFor="userEmail">Enter EMail Address</label>
-                        </span>
-                    </div>
-                    {admin === 'new' ? <div className="field col-12">
-                        <span className="p-float-label">
-                            <Password
-                                id="userPassword"
-                                panelClassName='w-full'
-                                inputClassName='w-full'
-                                className='w-full'
-                                header={header}
-                                footer={footer}
-                                toggleMask
-                                maxLength={15}
-                                value={enquireList.userPassword}
-                                onChange={handleChange}
-                            />
-                            <label htmlFor="userPassword">Password</label>
-                        </span>
-                    </div> : <></>}
-                    <div className="field col-12">
-                        <span className="p-float-label">
-                            <Dropdown
-                                id="userRole"
-                                className='w-full'
-                                optionLabel="name"
-                                options={adminRole}
-                                value={enquireList.userRole}
-                                onChange={handleChange}
-                            />
-                            <label htmlFor="userRole">Select Role</label>
-                        </span>
-                    </div>
-                    <div className="field col-12">
-                        <span className="p-float-label">
-                            <Dropdown id="userStatus"
-                                className='w-full'
-                                optionLabel="name"
-                                options={adminStatus}
-                                value={enquireList.userStatus}
-                                onChange={handleChange}
-                            />
-                            <label htmlFor="userStatus">Select Status</label>
-                        </span>
+                    <hr />
+                    <div className="col-12 lg:col-8">
+
+
+                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                            <label htmlFor="Title" className="col-fixed w-9rem">
+                                Title:
+                            </label>
+                            <InputText id="Title" value={enquireList.title}  disabled />
+                        </div>
+                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                            <label htmlFor="Description" className="col-fixed w-9rem">
+                                Description:
+                            </label>
+                            <InputText id="Description" value={enquireList.description} disabled/>
+                        </div>
+                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                            <label htmlFor="Deadline" className="col-fixed w-9rem">
+                                Deadline:
+                            </label>
+                            <InputText id="Deadline" value={enquireList.deadline}  disabled />
+                        </div>
+                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                            <label htmlFor="email" className="col-fixed w-9rem">
+                                Enquire Status:
+                            </label>
+                            <InputText id="status" value={enquireList.status} disabled />
+                        </div>
+                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                            <label htmlFor="amount" className="col-fixed w-9rem">
+                                Amount:
+                            </label>
+                            <InputText id="amount" keyfilter="pint" value={enquireList.amount} onChange={handleChange} />
+                            {/* onChange={(e) => setAmount(e.target.value)} */}
+                        </div>
+                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                            <label htmlFor="quotation" className="col-fixed w-9rem">
+                                Upload Quotation:
+                            </label>
+                            <FileUpload mode="basic" accept="application/pdf" id="quotation" maxFileSize={1000000} label="Upload" chooseLabel="Upload" customUpload uploadHandler={customBase64Uploader} className="mr-2 inline-block" />
+                            {/* <InputText id="email" value={enquireList.description}  onChange={(e) => setEmail(e.target.value)} required className="p-invalid" />                         */}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </>
     )
 }

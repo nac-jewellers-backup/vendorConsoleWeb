@@ -39,21 +39,34 @@ const LoginPage = () => {
     return (
         <>
             <div className={containerClassName}>
-                <div className="flex flex-column align-items-center justify-content-center">                   
-                    <div className="card text-center my-4" style={{ borderRadius: '55px' }}>
-                        <div className="font-semibold text-3xl my-3">
-                            <p>OTP Verification</p>
-                            <div className='text-center'>
-                                <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} />
-                                <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} />
-                                <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} />
-                                <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} />                                
-                                <Button label="Verify" className="col-3 text-xl mx-2" onClick={() => router.push('/')}></Button>
+                <div className="flex flex-column align-items-center justify-content-center">
+                    <div>
+                        <div className="w-full surface-card py-8 px-5 sm:px-8" style={{ borderRadius: '53px' }}>
+                            <div>
+                                <>
+                                    <label htmlFor="pint" className="block text-900 text-xl font-medium mb-2" >
+                                    Change Password
+                                    </label>
+                                    <div className="p-fluid formgrid grid">                        
+                                        <div className="field col-12 md:col-12">
+                                            <label htmlFor="lastname2">New Password</label>
+                                            <InputText id="lastname2" type="text" />
+                                        </div>
+                                        <div className="field col-12 md:col-12">
+                                            <label htmlFor="lastname2">Confirm Password</label>
+                                            <InputText id="lastname2" type="text" />
+                                        </div>
+                                        <div className="text-right">                                       
+                                        <Button label="Change Password"  className="w-full p-3 text-xl"  onClick={() => router.push('/')}></Button>
+                                        </div>
+                                    </div>
+                                </>                                     
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+             
             <AppFooter />
         </>
     );

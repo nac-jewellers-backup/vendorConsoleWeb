@@ -19,14 +19,15 @@ const AppTopbar = forwardRef((props, ref) => {
         topbarmenubutton: topbarmenubuttonRef.current
     }));
     const overlayMenuItems = [
-        {
-            label: 'Profile',
-            icon: 'pi pi-user',
-            url: '/uikit/formlayout'
-        },
+        // {
+        //     label: 'Profile',
+        //     icon: 'pi pi-user',
+        //     url: '/uikit/formlayout'
+        // },
         {
             label: 'Change Password',
-            icon: 'pi pi-lock'
+            icon: 'pi pi-lock',
+            url: '/pages/changepassword'
         },
         {
             separator: true

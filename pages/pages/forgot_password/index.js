@@ -42,33 +42,9 @@ const LoginPage = () => {
                 {/* <div style={{ borderRadius: '56px', padding: '0.3rem', background: 'linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)' }}> */}
                 <div>
                     <div className="w-full surface-card py-8 px-5 sm:px-8" style={{ borderRadius: '53px' }}>
-                        {/* <div className="text-center mb-5">
-                            <img src="/demo/images/login/avatar.png" alt="Image" height="50" className="mb-3" />
-                            <div className="text-900 text-3xl font-medium mb-3">Welcome, Isabel!</div>
-                            <span className="text-600 font-medium">Sign in to continue</span>
-                        </div> */}
-
                         <div>
-                            {/* <label htmlFor="mobilenum" className="block text-900 text-xl font-medium mb-2">
-                                Enter Registered Mobile Number
-                            </label>
-                            <InputText inputid="mobilenum" type="text" placeholder="Mobile Number" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} /> */}
-                            {/* <InputNumber value={inputNumberValue} onValueChange={(e) => setInputNumberValue(e.value)} showButtons></InputNumber> */}
-
                             {isNumber ?
                                 <>
-                                    {/* <div className="field col-12">
-                                        <span className="p-float-label">
-                                            <InputText
-                                                id="mobile"
-                                                keyfilter="pint"
-                                                className='w-full md:w-30rem mb-5'
-                                                autoComplete='off'
-                                                maxLength={10}                                                
-                                            />
-                                            <label htmlFor="mobile">Enter Registered Mobile Number</label>
-                                        </span>
-                                    </div>                                    */}
                                     <label htmlFor="pint" className="font-bold block mb-2" >
                                         Enter Registered Mobile Number
                                     </label>
@@ -83,7 +59,7 @@ const LoginPage = () => {
                                             {/* <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} />
                                             <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} />
                                             <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} /> */}
-                                            <Button label="Verify" className="col-3 text-xl mx-2" onClick={() => router.push('/')}></Button>
+                                            <Button label="Verify" className="col-3 text-xl mx-2" onClick={() => router.push('/pages/new_password')}></Button>
                                         </div>
                                     </div>
                                 </>
