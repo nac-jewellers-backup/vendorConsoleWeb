@@ -305,8 +305,8 @@ export default function o() {
                             <label htmlFor="invoice" className="col-fixed w-9rem">
                                 Upload Invoice:
                             </label>
-                            <FileUpload mode="basic" accept="application/pdf" id="invoice" maxFileSize={1000000} label="Upload" chooseLabel="Upload" customUpload uploadHandler={customBase64Uploader} className="mr-2 inline-block" />                            
-                            {/* <FileUpload name="demo[]" url={'/api/upload'} id="invoice" multiple accept="application/pdf" maxFileSize={1000000} customUpload uploadHandler={customBase64Uploader} className="mr-2 inline-block"  /> */}
+                            {/* <FileUpload mode="basic" accept="application/pdf" id="invoice" maxFileSize={1000000} label="Upload" chooseLabel="Upload" customUpload uploadHandler={customBase64Uploader} className="mr-2 inline-block" />                             */}
+                            <FileUpload name="demo[]" url={'/api/upload'} accept="application/pdf"  maxFileSize={1000000} />
                         </div>
 
                 </Dialog>

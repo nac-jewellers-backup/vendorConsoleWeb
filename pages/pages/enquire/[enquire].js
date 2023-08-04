@@ -133,15 +133,16 @@ export default function Enquire() {
                             <label htmlFor="amount" className="col-fixed w-9rem">
                                 Amount:
                             </label>
-                            <InputText id="amount" keyfilter="pint" value={enquireList.amount} onChange={handleChange} />
+                            <InputText id="amount" keyfilter="money" value={enquireList.amount} onChange={handleChange} />
                             {/* onChange={(e) => setAmount(e.target.value)} */}
                         </div>
                         <div className="flex align-items-center flex-wrap gap-2 mb-3">
                             <label htmlFor="quotation" className="col-fixed w-9rem">
                                 Upload Quotation:
                             </label>
-                            <FileUpload mode="basic" accept="application/pdf" id="quotation" maxFileSize={1000000} label="Upload" chooseLabel="Upload" customUpload uploadHandler={customBase64Uploader} className="mr-2 inline-block" />
+                            {/* <FileUpload mode="basic" accept="application/pdf" id="quotation" maxFileSize={1024000} label="Upload" chooseLabel="Upload" customUpload uploadHandler={customBase64Uploader} className="mr-2 inline-block" /> */}
                             {/* <InputText id="email" value={enquireList.description}  onChange={(e) => setEmail(e.target.value)} required className="p-invalid" />                         */}
+                            <FileUpload name="demo[]" url={'/api/upload'} accept="application/pdf"  maxFileSize={1000000} />
                         </div>
                     </div>
                 </div>
