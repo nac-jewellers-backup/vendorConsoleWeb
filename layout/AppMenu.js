@@ -12,7 +12,7 @@ const AppMenu = () => {
                 // { label: 'Forgot Password', icon: 'pi pi-fw pi-user', to: '/pages/forgot_password', id: 'navForgotpass' },
                 { label: 'Enquires', icon: 'pi pi-fw pi-list', to: '/pages/enquire', id: 'navEnquire' },
                 { label: 'My Orders', icon: 'pi pi-fw pi-compass', to: '/pages/orders', id: 'navOrder' },
-                // { label: 'Payment List', icon: 'pi pi-fw pi-dollar', to: '/pages/payment', id: 'navPayment' }
+                { label: 'Payment List', icon: 'pi pi-fw pi-dollar', to: '/pages/payment', id: 'navPayment' }
             ]
         },
         {
