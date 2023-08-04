@@ -282,7 +282,7 @@ export default function o() {
                 </div>
                 <hr />
                 <div className='mt-3'>
-                <Dialog visible={invoiceDialog} style={{ width: '450px' }} header="Invoice Details" type="button" modal className="p-fluid" footer={invoiceDialogFooter} onHide={hideDialog}>
+                <Dialog visible={invoiceDialog} style={{ width: '505px' }} header="Invoice Details" type="button" modal className="p-fluid" footer={invoiceDialogFooter} onHide={hideDialog}>
                        
                         <div className="field">
                             <label htmlFor="invoiceidcre">Invoice No.</label>
