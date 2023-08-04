@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState , useEffect } from 'react';
 import { Checkbox } from 'primereact/checkbox';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
@@ -20,14 +20,6 @@ const LoginPage = () => {
     const router = useRouter();
     const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
 
-    useEffect(() => {
-        const getData = async () => {
-            setLoaded(true);
-            setLoaded(false);
-        }
-        document.title = 'Login | NAC Vendor';
-        getData();
-    }, []);
 
     return (
         <>

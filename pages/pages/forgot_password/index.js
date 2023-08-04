@@ -54,7 +54,7 @@ const LoginPage = () => {
                                             {/* <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} />
                                             <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} />
                                             <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} /> */}
-                                            <Button label="Verify" className="col-3 text-xl mx-2" onClick={() => setIsNumber(false)}></Button>                                            
+                                            <Button label="Send Otp" className="col-3 text-xl mx-2" onClick={() => setIsNumber(false)}></Button>                                            
                                         </div>
                                     </div>
                                 </> :
