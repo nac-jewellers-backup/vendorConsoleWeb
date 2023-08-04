@@ -73,7 +73,7 @@ const Enquire = () => {
         return (
             <div className='mx-2'>
                 <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center mt-1">
-                    <h5 className="m-0">Enquires</h5>
+                    <h5 className="m-0">My Enquires</h5>
                     {/* <span className="block mt-2 md:mt-0 p-input-icon-left">
                         <Button icon="pi pi-plus" severity="success" className="mr-2" tooltip="Add Admin" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/admin/new')} />
                     </span> */}
@@ -83,7 +83,7 @@ const Enquire = () => {
                     <div className="field col-12 md:col-2">
                         <span className="p-float-label">
                             <InputText
-                                id="searchName"
+                                id="searchTitle"
                                 keyfilter={/^[^<>*!]+$/}
                                 className='w-full'
                                 autoComplete='off'
@@ -91,7 +91,21 @@ const Enquire = () => {
                                 onChange={(e) => setFilters({ ...filters, title: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
                                 onKeyDown={(e) => setFilters({ ...filters, title: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
                             />
-                            <label htmlFor="searchName">Search by Name</label>
+                            <label htmlFor="searchTitle">Search by Title</label>
+                        </span>
+                    </div>
+                    <div className="field col-12 md:col-2">
+                        <span className="p-float-label">
+                            <InputText
+                                id="searchDescription"
+                                keyfilter={/^[^<>*!]+$/}
+                                className='w-full'
+                                autoComplete='off'
+                                value={filters.description.value}
+                                onChange={(e) => setFilters({ ...filters, description: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
+                                onKeyDown={(e) => setFilters({ ...filters, description: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
+                            />
+                            <label htmlFor="searchDescription">Search by Description</label>
                         </span>
                     </div>
                     {/* <div className="field col-12 md:col-2">
@@ -131,8 +145,7 @@ const Enquire = () => {
                         </span>
                     </div>
                     <div className="field col-12 md:col-2">
-                        <Button icon="pi pi-times" severity="danger" className="mx-1 inline-block" style={{ width: '45%' }} onClick={() => initFilters()} tooltip="Clear Search" tooltipOptions={{ position: 'top' }} />
-                        {/* <Button icon="pi pi-upload" severity="help" className="mx-1 inline-block" style={{ width: '45%' }} onClick={exportExcel} disabled={selectedList.length === 0} tooltip="Export" tooltipOptions={{ position: 'top' }} /> */}
+                        <Button icon="pi pi-times" severity="danger" className="mx-1 inline-block" style={{ width: '45%' }} onClick={() => initFilters()} tooltip="Clear Search" tooltipOptions={{ position: 'top' }} />                        
                     </div>
                 </div>
             </div>
@@ -273,7 +286,7 @@ const Enquire = () => {
             setLoaded(true);
             setLoaded(false);
         }
-        document.title = 'Enquires | NAC Vendor';
+        document.title = 'My Enquires | NAC Vendor';
         getData();
     }, []);
 

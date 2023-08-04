@@ -31,6 +31,7 @@ const Orders = () => {
   
     const [filters, setFilters] = useState({
         title: { value: '', matchMode: FilterMatchMode.CONTAINS },
+        description: { value: '', matchMode: FilterMatchMode.CONTAINS },
         orderid: { value: '', matchMode: FilterMatchMode.CONTAINS }
     });
     const toast = useRef(null);
@@ -64,6 +65,7 @@ const Orders = () => {
     const initFilters = () => {
         setFilters({
             title: { value: '', matchMode: FilterMatchMode.CONTAINS },
+            description: { value: '', matchMode: FilterMatchMode.CONTAINS },
             orderid: { value: '', matchMode: FilterMatchMode.CONTAINS }
         });
     };
@@ -88,7 +90,35 @@ const Orders = () => {
                             />
                             <label htmlFor="title">Search by Title</label>
                         </span>
-                    </div>                    
+                    </div>  
+                    <div className="field col-12 md:col-2">
+                        <span className="p-float-label">
+                            <InputText
+                                id="searchDescription"
+                                keyfilter={/^[^<>*!]+$/}
+                                className='w-full'
+                                autoComplete='off' 
+                                value={filters.description.value}
+                                onChange={(e) => setFilters({ ...filters, description: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
+                                onKeyDown={(e) => setFilters({ ...filters, description: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
+                            />
+                            <label htmlFor="searchDescription">Search by Description</label>
+                        </span>
+                    </div>
+                    <div className="field col-12 md:col-2">
+                        <span className="p-float-label">
+                            <InputText
+                                id="searchOrderId"
+                                keyfilter="pint"
+                                className='w-full'
+                                autoComplete='off'
+                                value={filters.orderid.value}
+                                onChange={(e) => setFilters({ ...filters, orderid: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
+                                onKeyDown={(e) => setFilters({ ...filters, orderid: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
+                            />
+                            <label htmlFor="searchOrderId">Search by Order Id</label>
+                        </span>
+                    </div>                  
                     {/* <div className="field col-12 md:col-2">
                         <span className="p-float-label">
                             <Dropdown id="dropdown" options={paymentstatus} value={filters.paymentstatus.value} onChange={(e) => setFilters({ ...filters, paymentstatus: { value: e.target.value, matchMode: FilterMatchMode.EQUALS } })} optionLabel="name" className='w-full' />
@@ -263,23 +293,23 @@ const Orders = () => {
                 />
                 <Column
                     header='Order Id' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='orderid' filterField="orderid" className='text-start'
+                    field='orderid' filterField="orderid" className='text-center'
                 />
                 <Column
                     header='Order Date' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='orderdate' filterField="orderdate" className='text-start'
+                    field='orderdate' filterField="orderdate" className='text-center'
                 />
                 <Column
                     header='Quotation Amount' headerStyle={{ width: '1%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='amount' filterField="amount" className='text-center'
+                    field='amount' filterField="amount" className='text-right'
                 />
                 <Column
                     header='Paid Amount' headerStyle={{ width: '1%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='paidamount' filterField="paidamount" className='text-center'
+                    field='paidamount' filterField="paidamount" className='text-right'
                 />
                 <Column
-                    header='Balance Amount' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='balanceamount' filterField="balanceamount" className='text-center'
+                    header='Balance Amount' headerStyle={{ width: '1%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
+                    field='balanceamount' filterField="balanceamount" className='text-right'
                 />
                 {/* <Column
                     header='Payment Status' headerStyle={{ width: '1%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable

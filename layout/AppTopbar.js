@@ -34,7 +34,8 @@ const AppTopbar = forwardRef((props, ref) => {
         },
         {
             label: 'Logout',
-            icon: 'pi pi-sign-out'
+            icon: 'pi pi-sign-out',
+            url: '/'
         }
     ];
     const toggleMenu = (event) => {

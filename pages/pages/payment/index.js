@@ -284,7 +284,7 @@ const Admins = () => {
                 />
                 <Column
                     header='Order Id' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='orderid' filterField="orderid" className='text-start'
+                    field='orderid' filterField="orderid" className='text-center'
                 />
                 <Column
                     header='Transaction Id' headerStyle={{ width: '8%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
@@ -292,11 +292,11 @@ const Admins = () => {
                 />
                 <Column
                     header='Amount Received' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='amountreceived' filterField="amountreceived" className='text-center'
+                    field='amountreceived' filterField="amountreceived" className='text-right'
                 />
                 <Column
                     header='Payment Date' headerStyle={{ width: '6%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='paymentdate' filterField="paymentdate" className='text-center'
+                    field='paymentdate' filterField="paymentdate" className='text-right'
                 />
                 <Column
                     header='Actions' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }}

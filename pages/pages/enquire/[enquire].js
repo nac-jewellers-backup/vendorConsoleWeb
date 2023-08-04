@@ -93,56 +93,63 @@ export default function Enquire() {
             <form method='POST' onSubmit={handleSubmit}>
 
                 <Toast ref={toast} />
-                <div className='card'>
-                    <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 className="m-0">{page}</h5>
-                        <span className="block md:mt-0 p-input-icon-left">
-                            <Button icon={`pi pi-${enquire === 'new' ? 'plus' : 'pencil'}`} severity="success" className="mr-1" tooltip={page} tooltipOptions={{ position: 'top' }} disabled={false} />
-                            <Button icon="pi pi-arrow-left" severity="danger" className="ml-1" tooltip="Go Back" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/enquire')} />
-                        </span>
+                <div className="col-12 md:col-12">
+                    <div className='card'>
+                        <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                            <h5 className="m-0">{page}</h5>
+                            <span className="block md:mt-0 p-input-icon-left">
+                                <Button icon={`pi pi-${enquire === 'new' ? 'plus' : 'pencil'}`} severity="success" className="mr-1" tooltip={page} tooltipOptions={{ position: 'top' }} disabled={false} />
+                                <Button icon="pi pi-arrow-left" severity="danger" className="ml-1" tooltip="Go Back" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/enquire')} />
+                            </span>
+                        </div>
+                        <hr />
+                        <div className="col-12 lg:col-8">
+                            <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                                <label htmlFor="Title" className="col-fixed w-9rem">
+                                    Title:
+                                </label>
+                                <InputText id="Title" value={enquireList.title}  disabled />
+                            </div>
+                            <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                                <label htmlFor="Description" className="col-fixed w-9rem">
+                                    Description:
+                                </label>
+                                <InputText id="Description" value={enquireList.description} disabled/>
+                            </div>
+                            <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                                <label htmlFor="Deadline" className="col-fixed w-9rem">
+                                    Deadline:
+                                </label>
+                                <InputText id="Deadline" value={enquireList.deadline}  disabled />
+                            </div>
+                            <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                                <label htmlFor="email" className="col-fixed w-9rem">
+                                    Enquire Status:
+                                </label>
+                                <InputText id="status" value={enquireList.status} disabled />
+                            </div>
+                            <div className="flex align-items-center flex-wrap gap-2 mb-3">
+                                <label htmlFor="amount" className="col-fixed w-9rem">
+                                    Amount:
+                                </label>
+                                <InputText id="amount" keyfilter="money" value={enquireList.amount} onChange={handleChange} />
+                                {/* onChange={(e) => setAmount(e.target.value)} */}
+                            </div>                            
+                        </div>
                     </div>
+                </div>
+                <div className="col-12 md:col-12">               
+                    <div className='card'>
+                    <h5 htmlFor="quotation" className="col-fixed w">Upload Quotation :</h5>
                     <hr />
-                    <div className="col-12 lg:col-8">
-
-
                         <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                            <label htmlFor="Title" className="col-fixed w-9rem">
-                                Title:
-                            </label>
-                            <InputText id="Title" value={enquireList.title}  disabled />
-                        </div>
-                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                            <label htmlFor="Description" className="col-fixed w-9rem">
-                                Description:
-                            </label>
-                            <InputText id="Description" value={enquireList.description} disabled/>
-                        </div>
-                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                            <label htmlFor="Deadline" className="col-fixed w-9rem">
-                                Deadline:
-                            </label>
-                            <InputText id="Deadline" value={enquireList.deadline}  disabled />
-                        </div>
-                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                            <label htmlFor="email" className="col-fixed w-9rem">
-                                Enquire Status:
-                            </label>
-                            <InputText id="status" value={enquireList.status} disabled />
-                        </div>
-                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                            <label htmlFor="amount" className="col-fixed w-9rem">
-                                Amount:
-                            </label>
-                            <InputText id="amount" keyfilter="money" value={enquireList.amount} onChange={handleChange} />
-                            {/* onChange={(e) => setAmount(e.target.value)} */}
-                        </div>
-                        <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                            <label htmlFor="quotation" className="col-fixed w-9rem">
+                            {/* <label htmlFor="quotation" className="col-fixed w">
                                 Upload Quotation:
-                            </label>
+                            </label> */}
+                           
                             {/* <FileUpload mode="basic" accept="application/pdf" id="quotation" maxFileSize={1024000} label="Upload" chooseLabel="Upload" customUpload uploadHandler={customBase64Uploader} className="mr-2 inline-block" /> */}
                             {/* <InputText id="email" value={enquireList.description}  onChange={(e) => setEmail(e.target.value)} required className="p-invalid" />                         */}
-                            <FileUpload name="demo[]" url={'/api/upload'} accept="application/pdf"  maxFileSize={1000000} />
+                            <FileUpload name="demo[]" url={'/api/upload'} accept="application/pdf" maxFileSize={1000000} />
                         </div>
                     </div>
                 </div>
