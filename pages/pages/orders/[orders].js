@@ -270,7 +270,6 @@ export default function o() {
         <form method='POST' onSubmit={handleSubmit}>
             <Toast ref={toast} />
             {/* <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar> */}
-
             <div className='card'>
                 <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                     <h5 className="m-0">{page}</h5>
@@ -310,49 +309,40 @@ export default function o() {
                         </div>
 
                 </Dialog>
-                {/* <div className="col-12 lg:col-8">
+                <div className="col-12 lg:col-8">
                     <div className="flex align-items-center flex-wrap gap-2 mb-3">
                         <label htmlFor="orderid" className="col-fixed w-9rem">
                            Order ID :
                         </label>
-                        <InputText id="orderid" value={ordersList.orderid}  disabled />
+                        <span>1</span>
                     </div>
                     <div className="flex align-items-center flex-wrap gap-2 mb-3">
                         <label htmlFor="invoiceid" className="col-fixed w-9rem">
                             Invoice No. :
                         </label>
-                        <InputText id="invoiceid" value={ordersList.invoiceid} disabled />
+                        <span>ABC1</span>
                     </div>
                     <div className="flex align-items-center flex-wrap gap-2 mb-3">
                         <label htmlFor="orderamount" className="col-fixed w-9rem">
                             Amount :
                         </label>
-                        <InputText id="orderamount" value={ordersList.orderamount}  disabled />
+                        <span>12000</span>
                     </div>
                     <div className="flex align-items-center flex-wrap gap-2 mb-3">
                         <label htmlFor="paidamount" className="col-fixed w-9rem">
                             Paid Amount :
                         </label>
-                        <InputText id="paidamount" value={ordersList.paidamount} disabled />
+                        <span>7500</span>
                     </div>
                     <div className="flex align-items-center flex-wrap gap-2 mb-3">
                         <label htmlFor="balanceamount" className="col-fixed w-9rem">
                             Balance Amount :
                         </label>
-                        <InputText id="balanceamount" value={ordersList.balanceamount}  disabled />
+                        <span>4500</span>
                     </div>
                     </div>
-                </div> */}
-                    <div className='mt-3'>
-                        {/* <div class="flex align-items-center py-2 px-3"><i class="pi pi-fw pi-info-circle mr-2 text-1xl"></i><p class="m-0 text-lg">Title : <span>Brouchure Design Pamphlet</span></p></div> */}
-                        <div class="flex align-items-center py-2 px-3"><i class="pi pi-fw pi-info-circle mr-2 text-1xl"></i><p class="m-0 text-lg">Order ID : <span>1</span></p></div>
-                        <div class="flex align-items-center py-2 px-3"><i class="pi pi-fw pi-info-circle mr-2 text-1xl"></i><p class="m-0 text-lg">Invoice No. : <span>ABC1</span></p></div>
-                        <div class="flex align-items-center py-2 px-3"><i class="pi pi-fw pi-info-circle mr-2 text-1xl"></i><p class="m-0 text-lg">Amount : <span>12000</span></p></div>
-                        <div class="flex align-items-center py-2 px-3"><i class="pi pi-fw pi-info-circle mr-2 text-1xl"></i><p class="m-0 text-lg">Paid Amount : <span>7500</span></p></div>
-                        <div class="flex align-items-center py-2 px-3"><i class="pi pi-fw pi-info-circle mr-2 text-1xl"></i><p class="m-0 text-lg">Balance Amount : <span>4500</span></p></div>
-                    </div>
-                </div>
-            </div>
+                </div> 
+            </div>           
             
             <>            
             <DataTable            

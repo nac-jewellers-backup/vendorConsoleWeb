@@ -44,12 +44,19 @@ const LoginPage = () => {
                     <div className="w-full surface-card py-8 px-5 sm:px-8" style={{ borderRadius: '53px' }}>
                         <div>
                             {isNumber ?
-                                <>
-                                    <label htmlFor="pint" className="font-bold block mb-2" >
-                                        Enter Registered Mobile Number
-                                    </label>
-                                    <InputText id="pint" keyfilter="pint" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} placeholder="Enter Registered Mobile Number" maxLength={10} autoComplete='off'/>
-                                    <Button label="Send OTP" className="w-full p-3 text-xl" onClick={() => {setIsNumber(false)}}></Button>
+                                <>                                    
+                                    <div className="font-semibold text-3xl my-3">
+                                        <label htmlFor="pint" className="font-bold block mb-2" >
+                                            Enter Registered Mobile Number
+                                        </label>
+                                        <div className='text-center'>
+                                            <InputText keyfilter={'pint'} className='col-6 mx-2' maxLength={10} autoComplete='off'/>                                            
+                                            {/* <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} />
+                                            <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} />
+                                            <InputText keyfilter={'pint'} className='col-2 mx-1' maxLength={1} /> */}
+                                            <Button label="Verify" className="col-3 text-xl mx-2" onClick={() => setIsNumber(false)}></Button>                                            
+                                        </div>
+                                    </div>
                                 </> :
                                 <>
                                     <div className="font-semibold text-3xl my-3">
