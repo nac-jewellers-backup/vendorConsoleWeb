@@ -36,7 +36,7 @@ const LoginPage = () => {
             setDisable(true);
             if (mobile_number == '8925754119' && password == '12345678') {
                 setErr('');
-                router.push('/pages/enquire')
+                router.push('/dashboard')
             } else {
                 setErr('Invalid Credentials');
                 setDisable(false);
@@ -53,7 +53,6 @@ const LoginPage = () => {
                         <div>
                             <div className="w-full surface-card py-8 px-5 sm:px-8" style={{ borderRadius: '53px' }}>
                                 <form method='POST' onSubmit={handleSubmit}>
-
                                     <label htmlFor="mobile_number" className="block text-900 text-xl font-medium mb-2">
                                         Mobile Number
                                     </label>

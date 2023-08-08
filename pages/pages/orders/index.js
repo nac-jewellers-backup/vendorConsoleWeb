@@ -126,7 +126,7 @@ const Orders = () => {
                         </span>
                     </div> */}
                     <div className="field col-12 md:col-2">
-                        <Button icon="pi pi-times" severity="danger" className="mx-1 inline-block" style={{ width: '45%' }} onClick={() => initFilters()} tooltip="Clear Search" tooltipOptions={{ position: 'top' }} />
+                        <Button icon="pi pi-times" severity="danger" className="mx-1 inline-block" style={{ width: '80%' }} onClick={() => initFilters()} tooltip="Clear Search" tooltipOptions={{ position: 'top' }} />
                         {/* <Button icon="pi pi-upload" severity="help" className="mx-1 inline-block" style={{ width: '45%' }} onClick={exportExcel} disabled={selectedList.length === 0} tooltip="Export" tooltipOptions={{ position: 'top' }} /> */}
                     </div>
                 </div>
@@ -196,16 +196,7 @@ const Orders = () => {
         return <h5 className='text-center pt-1' style={{ fontSize: '1em' }}>No Orders to Display</h5>
     };
     const footerTemplate = {
-        layout: 'RowsPerPageDropdown CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
-        RowsPerPageDropdown: (options) => {
-            const dropdownOptions = [{ label: 'All', value: options.totalRecords }, { label: 10, value: 10 }, { label: 25, value: 25 }, { label: 50, value: 50 }, { label: 100, value: 100 }];
-            return (
-                <div className='left_item'>
-                    <span style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
-                    <Dropdown value={options.value} onChange={options.onChange} options={dropdownOptions} />
-                </div>
-            );
-        },
+        
         CurrentPageReport: (options) => {
             const name = (options.totalRecords > 1) ? 'Orders' : 'Orders'
             return (
@@ -216,50 +207,60 @@ const Orders = () => {
                 </div>
             );
         },
-        FirstPageLink: (options) => {
+        layout: 'RowsPerPageDropdown CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
+        RowsPerPageDropdown: (options) => {
+            const dropdownOptions = [{ label: 'All', value: options.totalRecords }, { label: 10, value: 10 }, { label: 25, value: 25 }, { label: 50, value: 50 }, { label: 100, value: 100 }];
             return (
-                <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="py-3">First</span>
-                    <Ripple />
-                </button>
+                <div className='left_item'>
+                    {/* <span style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span> */}
+                    <Dropdown value={options.value} onChange={options.onChange} options={dropdownOptions} />
+                </div>
             );
         },
-        PrevPageLink: (options) => {
-            return (
-                <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="py-3">Previous</span>
-                    <Ripple />
-                </button>
-            );
-        },
-        PageLinks: (options) => {
-            if ((options.view.startPage === options.page && options.view.startPage !== 0) || (options.view.endPage === options.page && options.page + 1 !== options.totalPages)) {
-                const className = classNames(options.className, { 'p-disabled': true });
-                return <span className={className} style={{ userSelect: 'none' }}>...</span>
-            }
+        // FirstPageLink: (options) => {
+        //     return (
+        //         <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
+        //             <span className="py-3">First</span>
+        //             <Ripple />
+        //         </button>
+        //     );
+        // },
+        // PrevPageLink: (options) => {
+        //     return (
+        //         <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
+        //             <span className="py-3">Previous</span>
+        //             <Ripple />
+        //         </button>
+        //     );
+        // },
+        // PageLinks: (options) => {
+        //     if ((options.view.startPage === options.page && options.view.startPage !== 0) || (options.view.endPage === options.page && options.page + 1 !== options.totalPages)) {
+        //         const className = classNames(options.className, { 'p-disabled': true });
+        //         return <span className={className} style={{ userSelect: 'none' }}>...</span>
+        //     }
 
-            return (
-                <button type="button" className={options.className} onClick={options.onClick} >
-                    {options.page + 1}
-                </button>
-            );
-        },
-        NextPageLink: (options) => {
-            return (
-                <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="py-3 pull-left">Next</span>
-                    <Ripple />
-                </button>
-            );
-        },
-        LastPageLink: (options) => {
-            return (
-                <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="py-3 pull-right">Last</span>
-                    <Ripple />
-                </button>
-            );
-        }
+        //     return (
+        //         <button type="button" className={options.className} onClick={options.onClick} >
+        //             {options.page + 1}
+        //         </button>
+        //     );
+        // },
+        // NextPageLink: (options) => {
+        //     return (
+        //         <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
+        //             <span className="py-3 pull-left">Next</span>
+        //             <Ripple />
+        //         </button>
+        //     );
+        // },
+        // LastPageLink: (options) => {
+        //     return (
+        //         <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
+        //             <span className="py-3 pull-right">Last</span>
+        //             <Ripple />
+        //         </button>
+        //     );
+        // }
     };
 
     useEffect(() => {
