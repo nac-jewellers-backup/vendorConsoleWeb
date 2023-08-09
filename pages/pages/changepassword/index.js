@@ -21,7 +21,7 @@ const [otp,setOtp] = useState("")
 const [confirmOtp,setConfirmOtp] = useState("");
 
 // const [change_password, setChange_password] = useState({id: '' });
-const [change_password, setChange_password] = useState({ tableName: 'nac_cms_admin', id: '', old_password:'', new_password: '', confirmPassword:'' });
+const [change_password, setChange_password] = useState({ tableName: 'nac_cms_vendor', id: '', old_password:'', new_password: '', confirmPassword:'' });
 // const [password, setPassword] = useState({ new_password: '', confirmPassword: '' });
 
 const handleChange = (e) => {
@@ -38,7 +38,7 @@ useEffect(() => {
 // Mobile no validation
 const postUser = async() => {
     if(mobile_number && mobile_number.length ==10){
-       await axios.post(`${process.env.API_URL}/verify`, { tableName: "nac_cms_admin", mobile_number:mobile_number},{headers:{'x-api-key':process.env.API_KEY }})
+       await axios.post(`${process.env.API_URL}/verify`, { tableName: "nac_cms_vendor", mobile_number:mobile_number},{headers:{'x-api-key':process.env.API_KEY }})
     .then(res => {
         const {data} = res.data;        
             console.log(res.data);
