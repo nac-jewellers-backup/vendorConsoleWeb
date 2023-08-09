@@ -1,11 +1,27 @@
 {
     "data": [
-        {"id": "1000","code": "f230fh0g3","name": "Bamboo Watch","description": "Product Description","image": "bamboo-watch.jpg","price": 65,"category": "Accessories","quantity": 24,"inventoryStatus": "INSTOCK","rating": 5},
-        {"id": "1001","code": "nvklal433","name": "Black Watch","description": "Product Description","image": "black-watch.jpg","price": 72,"category": "Accessories","quantity": 61,"inventoryStatus": "INSTOCK","rating": 4},
-        {"id": "1002","code": "zz21cz3c1","name": "Blue Band","description": "Product Description","image": "blue-band.jpg","price": 79,"category": "Fitness","quantity": 2,"inventoryStatus": "LOWSTOCK","rating": 3},
-        {"id": "1003","code": "244wgerg2","name": "Blue T-Shirt","description": "Product Description","image": "blue-t-shirt.jpg","price": 29,"category": "Clothing","quantity": 25,"inventoryStatus": "INSTOCK","rating": 5},
-        {"id": "1004","code": "h456wer53","name": "Bracelet","description": "Product Description","image": "bracelet.jpg","price": 15,"category": "Accessories","quantity": 73,"inventoryStatus": "INSTOCK","rating": 4}      
+        {"id": "1000","code": "f230fh0g3","title": "Regarding sample brouchers","deadline": "22-10-2023","status": "Open","price": 65,"category": "Accessories","quantity": 24,"inventoryStatus": "INSTOCK","rating": 5},
+        {"id": "1001","code": "nvklal433","title": "Title2","deadline": "10-10-2023","status": "Closed","price": 72,"category": "Accessories","quantity": 61,"inventoryStatus": "INSTOCK","rating": 4},
+        {"id": "1002","code": "zz21cz3c1","title": "Title3","deadline": "01-12-2024","status": "Closed","price": 79,"category": "Fitness","quantity": 2,"inventoryStatus": "LOWSTOCK","rating": 3},
+        {"id": "1003","code": "244wgerg2","title": "Title4","deadline": "02-09-2023","status": "Open","price": 29,"category": "Clothing","quantity": 25,"inventoryStatus": "INSTOCK","rating": 5},
+        {"id": "1004","code": "h456wer53","title": "Title5","deadline": "27-09-2023","status": "Open","price": 15,"category": "Accessories","quantity": 73,"inventoryStatus": "INSTOCK","rating": 4}      
         
-    ]
+    ],
+    "data1": [
+        {"orderid": "102","transactionid": "93DJ2231ADD35645D","paymentdate": "13-11-2023","description": "Product Description","image": "bamboo-watch.jpg","price": 65,"category": "Accessories","quantity": 24,"inventoryStatus": "INSTOCK","rating": 5},
+        {"orderid": "101","transactionid": "83DJ2231ADD35689B","paymentdate": "27-09-2023","description": "Product Description","image": "black-watch.jpg","price": 72,"category": "Accessories","quantity": 61,"inventoryStatus": "INSTOCK","rating": 4},
+        {"orderid": "100","transactionid": "93DJ2231ADD35679Q","paymentdate": "10-10-2023","description": "Product Description","image": "blue-band.jpg","price": 79,"category": "Fitness","quantity": 2,"inventoryStatus": "LOWSTOCK","rating": 3},
+        {"orderid": "99","transactionid": "33DJ2231ADD35678E","paymentdate": "05-09-2023","description": "Product Description","image": "blue-t-shirt.jpg","price": 29,"category": "Clothing","quantity": 25,"inventoryStatus": "INSTOCK","rating": 5},
+        {"orderid": "98","transactionid": "63DJ2231ADD35675F","paymentdate": "23-08-2023","description": "Product Description","image": "bracelet.jpg","price": 15,"category": "Accessories","quantity": 73,"inventoryStatus": "INSTOCK","rating": 4}      
+        
+    ] ,
+    "data2": [
+        {"orderid": "102","orderdate": "27-09-2023","name": "shrisha Watch","description": "Product Description","image": "bamboo-watch.jpg","amount": 6533,"category": "Accessories","quantity": 24,"inventoryStatus": "INSTOCK","rating": 5},
+        {"orderid": "101","orderdate": "20-09-2023","name": "Black Watch","description": "Product Description","image": "black-watch.jpg","amount": 71202,"category": "Accessories","quantity": 61,"inventoryStatus": "INSTOCK","rating": 4},
+        {"orderid": "100","orderdate": "11-09-2023","name": "Blue Band","description": "Product Description","image": "blue-band.jpg","amount": 10009,"category": "Fitness","quantity": 2,"inventoryStatus": "LOWSTOCK","rating": 3},
+        {"orderid": "99","orderdate": "23-08-2023","name": "Blue T-Shirt","description": "Product Description","image": "blue-t-shirt.jpg","amount": 10000,"category": "Clothing","quantity": 25,"inventoryStatus": "INSTOCK","rating": 5},
+        {"orderid": "98","orderdate": "08-08-2023","name": "Bracelet","description": "Product Description","image": "bracelet.jpg","amount": 55230,"category": "Accessories","quantity": 73,"inventoryStatus": "INSTOCK","rating": 4}      
+        
+    ] 
 }
    

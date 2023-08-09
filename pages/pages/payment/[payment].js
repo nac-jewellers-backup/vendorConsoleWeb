@@ -62,7 +62,7 @@ export default function Payment() {
                     <h5 className="m-0">{page}</h5>
                     <span className="block md:mt-0 p-input-icon-left">
                         <Button icon={`pi pi-${payment === 'new' ? 'plus' : 'pencil'}`} severity="success" className="mr-1" tooltip={page} tooltipOptions={{ position: 'top' }} disabled={false}/>
-                        <Button icon="pi pi-arrow-left" severity="danger" className="ml-1" tooltip="Go Back" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/admin')} />
+                        <Button type='button' icon="pi pi-arrow-left" severity="danger" className="ml-1" tooltip="Go Back" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/admin')} />
                     </span>
                 </div>
                 <hr />

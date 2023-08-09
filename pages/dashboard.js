@@ -6,7 +6,9 @@ import { Menu } from 'primereact/menu';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ProductService } from '../demo/service/ProductService';
 import { LayoutContext } from '../layout/context/layoutcontext';
+import { Badge } from 'primereact/badge';
 import Link from 'next/link';
+
 const lineData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
@@ -53,6 +55,8 @@ const lineData1 = {
 
 const Dashboard = () => {
     const [products, setProducts] = useState(null);
+    const [products1, setProducts1] = useState(null);
+    const [products2, setProducts2] = useState(null);
     const menu1 = useRef(null);
     const menu2 = useRef(null);
     const [lineOptions, setLineOptions] = useState(null);
@@ -124,6 +128,8 @@ const Dashboard = () => {
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall1().then((data) => setProducts1(data));
+        ProductService.getProductsSmall2().then((data) => setProducts2(data));
     }, []);
 
     useEffect(() => {
@@ -135,7 +141,11 @@ const Dashboard = () => {
     }, [layoutConfig.colorScheme]);
 
     const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        return value.toLocaleString('en-INDIA', { style: 'currency', currency: 'INR' });
+    };
+
+    const status = (rowData) => {
+        return <Badge value={rowData.status} severity={rowData.status === 'Open' ? 'success' : 'danger'}></Badge>
     };
 
     return (
@@ -205,7 +215,7 @@ const Dashboard = () => {
                     <div className="flex justify-content-between mb-3">
                         <div>
                             <span className="block text-500 font-medium mb-3">Total Revenue</span>
-                            <div className="text-900 font-medium text-xl">16000</div>
+                            <div className="text-900 font-medium text-xl">&#8377;16000</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-cyan-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                             <i className="pi pi-dollar text-green-500 text-x" />
@@ -220,7 +230,7 @@ const Dashboard = () => {
                     <div className="flex justify-content-between mb-3">
                         <div>
                             <span className="block text-500 font-medium mb-3">Amount Received</span>
-                            <div className="text-900 font-medium text-xl">15200</div>
+                            <div className="text-900 font-medium text-xl">&#8377;15200</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-purple-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                             <i className="pi pi-paypal text-purple-500 text-xl" />
@@ -235,7 +245,7 @@ const Dashboard = () => {
                     <div className="flex justify-content-between mb-3">
                         <div>
                             <span className="block text-500 font-medium mb-3">Pending Amount</span>
-                            <div className="text-900 font-medium text-xl">800</div>
+                            <div className="text-900 font-medium text-xl">&#8377;800</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                             <i className="pi pi-dollar text-orange-500 text-xl" />
@@ -267,9 +277,9 @@ const Dashboard = () => {
                 <div className="card">
                     <h5>Recent 5 Enquiries</h5>
                     <DataTable value={products} rows={5}  responsiveLayout="scroll">                       
-                        <Column field="name" header="Title" sortable style={{ width: '35%' }} />
-                        <Column field="price" header="Deadline" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
-                        <Column field="name" header="Status" sortable style={{ width: '35%' }} />
+                        <Column field="title" header="Title" sortable style={{ width: '35%' }} />
+                        <Column field="deadline" header="Deadline" sortable style={{ width: '20%' }}/>
+                        <Column field="status" header="Status" sortable style={{ width: '20%' }} body={status} />
                         {/* <Column
                             header="View"
                             style={{ width: '15%' }}
@@ -283,14 +293,15 @@ const Dashboard = () => {
                 </div>
                 
                 <div className="col-12 xl:col-12">
-                    <div className="card">
+                    {/* <div className="card">
                         <h5>Recent 5 Payments</h5>
-                        <DataTable value={products} rows={5}  responsiveLayout="scroll">                            
-                            <Column field="name" header="Order Id" sortable style={{ width: '35%' }} />
-                            <Column field="price" header="Transaction Id" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
-                            <Column field="name" header="Payment Date" sortable style={{ width: '35%' }} />                            
+                        <DataTable value={products1} rows={5}  responsiveLayout="scroll">                            
+                            <Column field="orderid" header="Order Id" sortable style={{ width: '35%' }} />
+                            
+                            <Column field="transactionid" header="Transaction Id" sortable style={{ width: '35%' }} />                            
+                            <Column field="paymentdate" header="Payment Date" sortable style={{ width: '35%' }} />                            
                         </DataTable>
-                    </div>
+                    </div> */}
                     {/* <ul className="list-none p-0 m-0">
                         <li className="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                             <div>
@@ -376,11 +387,11 @@ const Dashboard = () => {
                 </div>
                 <div className="card">
                     <h5>Recent 5 Orders</h5>
-                    <DataTable value={products} rows={5}  responsiveLayout="scroll">
+                    <DataTable value={products2} rows={5}  responsiveLayout="scroll">
                         {/* <Column header="Image" body={(data) => <img className="shadow-2" src={`/demo/images/product/${data.image}`} alt={data.image} width="50" />} /> */}
-                        <Column field="name" header="Order Id" sortable style={{ width: '35%' }} />
-                        <Column field="price" header="Order Date" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
-                        <Column field="name" header="Amount" sortable style={{ width: '35%' }} />
+                        <Column field="orderid" header="Order Id" sortable style={{ width: '35%' }} />
+                        <Column field="orderdate" header="Order Date" sortable style={{ width: '35%' }}  />
+                        <Column field="amount" header="Amount" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.amount)} />
                     </DataTable>
                 </div>
                 

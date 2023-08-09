@@ -69,7 +69,9 @@ export default function Enquire() {
         else if (!enquireList.quotation) { toastAlert('Upload the quotation'); }
     };
 
-
+    const status = (rowData) => {
+        return <Badge value={rowData.status} severity={rowData.status === 'Open' ? 'success' : 'danger'}></Badge>
+    };
 
     const exportCSV = () => {
         dt.current.exportCSV();
@@ -101,7 +103,7 @@ export default function Enquire() {
                             <h5 className="m-0">{page}</h5>
                             <span className="block md:mt-0 p-input-icon-left">
                                 {/* <Button icon={`pi pi-${enquire === 'new' ? 'plus' : 'pencil'}`} severity="success" className="mr-1" tooltip={page} tooltipOptions={{ position: 'top' }} disabled={false} /> */}
-                                <Button icon="pi pi-arrow-left" severity="danger" className="ml-1" tooltip="Go Back" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/enquire')} />
+                                <Button icon="pi pi-arrow-left" type='button' severity="danger" className="ml-1" tooltip="Go Back" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/enquiries')} />
                             </span>
                         </div>
                         <hr />
@@ -158,7 +160,7 @@ export default function Enquire() {
                                 <span>27-Jul-2023</span>
                             </div>
                             <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                                <label htmlFor="paidamount" className="col-fixed w-9rem">
+                                <label htmlFor="paidamount" body={status} className="col-fixed w-9rem">
                                     Enquire Status :
                                 </label>
                                 <span>Open</span>

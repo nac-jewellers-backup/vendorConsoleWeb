@@ -17,7 +17,9 @@ import { getSession } from '../../util';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 
 
+
 const Enquiries = () => {
+
     const [userList, setUserList] = useState([{
         id: uuid(),
         title: 'Enquiries regarding sample brouchers',
@@ -220,7 +222,7 @@ const Enquiries = () => {
         });
     };
     const status = (rowData) => {
-        return <Badge value={rowData.status} severity={rowData.status === 'Active' ? 'success' : 'danger'}></Badge>
+        return <Badge value={rowData.status} severity={rowData.status === 'Open' ? 'success' : 'danger'}></Badge>
     };
     const actions = (rowData) => {
         return (
@@ -334,7 +336,7 @@ const Enquiries = () => {
                 />
                 <Column
                     header='Status' headerStyle={{ width: '8%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
-                    field='status' filterField="status" className='text-center'
+                    field='status' filterField="status" className='text-center' body={status}
                 />
                 <Column
                     header='Actions' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }}

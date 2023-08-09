@@ -113,11 +113,11 @@ const LoginPage = () => {
                                             <div className="p-fluid formgrid grid">
                                                 <div className="field col-12 md:col-12">
                                                     <label htmlFor="new_password">New Password</label>
-                                                    <Password inputId='new_password' value={password.new_password} onChange={handleChange} toggleMask feedback={false} />
+                                                    <Password inputId='new_password' value={password.new_password} maxLength={8} onChange={handleChange} toggleMask feedback={false} />
                                                 </div>
                                                 <div className="field col-12 md:col-12">
                                                     <label htmlFor="confirmPassword">Confirm Password</label>
-                                                    <Password inputId='confirmPassword' value={password.confirmPassword} onChange={handleChange} toggleMask feedback={false} />
+                                                    <Password inputId='confirmPassword' value={password.confirmPassword} maxLength={8} onChange={handleChange} toggleMask feedback={false} />
                                                 </div>
                                                 <label className="block text-900 text-xl font-medium mb-2 text-red-600">{mobile_validate}</label>
                                                 <Button label="Change Password" className="w-full p-3 text-xl" />
