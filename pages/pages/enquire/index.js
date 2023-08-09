@@ -13,6 +13,7 @@ import { Toast } from 'primereact/toast';
 import { Badge } from 'primereact/badge';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode } from 'primereact/api';
+import { getSession } from '../../util';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 
 
@@ -21,10 +22,10 @@ const Enquire = () => {
         id: uuid(),
         title: 'Enquire regarding sample brouchers',
         description: 'Enquire,iYou might enquire, or ask about, the difference between the words enquire and "inquire." Good question. The answer is, not much. They are the same word with different spellings. Typically the British prefer the "e" version, but both are correct.nquire (rather formal) to ask somebody for information: I called the station to enquire about train times.',
-        status: 'Open',        
+        status: 'Open',
         deadline: '27-Jul-2023'
     }]);
-   
+
     const adminStatus = [
         { name: 'All', code: '' },
         { name: 'Open', code: 'Open' },
@@ -33,10 +34,10 @@ const Enquire = () => {
     ];
     const [filters, setFilters] = useState({
         title: { value: '', matchMode: FilterMatchMode.CONTAINS },
-        description: { value: '', matchMode: FilterMatchMode.CONTAINS },        
+        description: { value: '', matchMode: FilterMatchMode.CONTAINS },
         deadline: { value: '', matchMode: FilterMatchMode.EQUALS },
         status: { value: '', matchMode: FilterMatchMode.EQUALS }
-        
+
     });
     const toast = useRef(null);
     const dt = useRef(null);
@@ -65,18 +66,44 @@ const Enquire = () => {
             description: { value: '', matchMode: FilterMatchMode.CONTAINS },
             deadline: { value: '', matchMode: FilterMatchMode.EQUALS },
             status: { value: '', matchMode: FilterMatchMode.CONTAINS }
-         
+
             // userStatus: { value: '', matchMode: FilterMatchMode.EQUALS }
         });
     };
+
+    useEffect(() => {
+        const getData = async () => {
+            setLoaded(true);
+            const session = getSession();
+            if (!session) { router.push("/") }
+            // await axios.post(`${process.env.API_URL}/list_enquire`, { session: session }, { headers: { 'x-api-key': process.env.API_KEY } }).then((response) => {
+            //     console.log(response.data.result);
+            //     setUserList(response.data.result)
+            //     setLoaded(false);
+            // }).catch((error) => {
+            //     console.log(error);
+            // });
+
+        }
+        document.title = 'Admin Lists | NAC Admin';
+        getData();
+    }, []);
+
+
+    const postUser = () => {
+        if (mobile_number && mobile_number.length == 10) {
+            axios.post('https://rqc4db3lq5.execute-api.us-east-2.amazonaws.com/dev/verify', { tableName: "nac_cms_admin", mobile_number: mobile_number }, { headers: { 'x-api-key': '8DCiyiPd0f6ojQaYPwsH42IpPacBXf976Yt4TCIr' } })
+                .then(res => console.log(res.data))
+        } else {
+            validat_mob("Enter Valid Mobile No")
+        }
+    }
+
     const headerTemplate = () => {
         return (
             <div className='mx-2'>
                 <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center mt-1">
                     <h5 className="m-0">My Enquires</h5>
-                    {/* <span className="block mt-2 md:mt-0 p-input-icon-left">
-                        <Button icon="pi pi-plus" severity="success" className="mr-2" tooltip="Add Admin" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/admin/new')} />
-                    </span> */}
                 </div>
                 <hr />
                 <div className='grid mt-3'>
@@ -145,7 +172,7 @@ const Enquire = () => {
                         </span>
                     </div>
                     <div className="field col-12 md:col-2">
-                        <Button icon="pi pi-times" severity="danger" className="mx-1 inline-block" style={{ width: '80%' }} onClick={() => initFilters()} tooltip="Clear Search" tooltipOptions={{ position: 'top' }} />                        
+                        <Button icon="pi pi-times" severity="danger" className="mx-1 inline-block" style={{ width: '80%' }} onClick={() => initFilters()} tooltip="Clear Search" tooltipOptions={{ position: 'top' }} />
                     </div>
                 </div>
             </div>
@@ -294,8 +321,13 @@ const Enquire = () => {
         <>
             <DataTable
                 tableStyle={{ width: '100%' }} className='mb-4 datatable-responsive' scrollHeight="430px" size='small' scrollable showGridlines stripedRows paginator
-                header={headerTemplate} filters={filters} loading={loaded} emptyMessage={emptyMessage} paginatorTemplate={footerTemplate}
-                dataKey="id" value={userList} rows={10} sortMode="multiple" removableSort
+                header={headerTemplate} filters={filters} loading={loaded} emptyMessage={emptyMessage}
+                rows={10}
+                rowsPerPageOptions={[5, 10, 25, 50]}
+                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Enquire"
+
+                dataKey="id" value={userList} sortMode="multiple" removableSort
                 ref={dt} selectionMode="checkbox" selection={selectedList} onSelectionChange={(e) => setSelectedList(e.value)}
             >
                 <Column
@@ -309,12 +341,12 @@ const Enquire = () => {
                 <Column
                     header='Description' headerStyle={{ width: '40%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
                     field='description' filterField="description" className='text-end'
-                />               
+                />
                 <Column
                     header='Deadline' headerStyle={{ width: '8%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
                     field='deadline' filterField="deadline" className='text-center'
                 />
-                 <Column
+                <Column
                     header='Status' headerStyle={{ width: '8%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
                     field='status' filterField="status" className='text-center'
                 />

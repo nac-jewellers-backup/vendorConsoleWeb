@@ -29,6 +29,28 @@ const lineData = {
     ]
 };
 
+const lineData1 = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+        // {
+        //     label: 'Enquires',
+        //     data: [65, 59, 80, 81, 56, 55, 40],
+        //     fill: false,
+        //     backgroundColor: '#2f4860',
+        //     borderColor: '#2f4860',
+        //     tension: 0.4
+        // },
+        {
+            label: 'Amount',
+            data: [2800, 41228, 3440, 10019, 8600, 1227, 9000],
+            fill: false,
+            backgroundColor: '#00bb7e',
+            borderColor: '#00bb7e',
+            tension: 0.4
+        }
+    ]
+};
+
 const Dashboard = () => {
     const [products, setProducts] = useState(null);
     const menu1 = useRef(null);
@@ -140,21 +162,53 @@ const Dashboard = () => {
                             <span className="block text-500 font-medium mb-3">Total Orders</span>
                             <div className="text-900 font-medium text-xl">100</div>
                         </div>
-                        <div className="flex align-items-center justify-content-center bg-orange-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                            <i className="pi pi-map-marker text-orange-500 text-xl" />
+                        <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                            <i className="pi pi-inbox text-blue-500 text-xl" />
                         </div>
                     </div>
+                    {/* <span className="text-green-500 font-medium">24 new </span>
+                    <span className="text-500">since last visit</span> */}
                 </div>
             </div>
             <div className="col-12 lg:col-6 xl:col-3">
                 <div className="card mb-0">
                     <div className="flex justify-content-between mb-3">
                         <div>
-                            <span className="block text-500 font-medium mb-3">Invoice Amount </span>
+                            <span className="block text-500 font-medium mb-3">Quotations Given</span>
+                            <div className="text-900 font-medium text-xl">140</div>
+                        </div>
+                        <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                            <i className="pi pi-book text-purple-500 text-xl" />
+                        </div>
+                    </div>
+                    {/* <span className="text-green-500 font-medium">24 new </span>
+                    <span className="text-500">since last visit</span> */}
+                </div>
+            </div>           
+            <div className="col-12 lg:col-6 xl:col-3">
+                <div className="card mb-0">
+                    <div className="flex justify-content-between mb-3">
+                        <div>
+                            <span className="block text-500 font-medium mb-3">Enquires Going to Expier</span>
+                            <div className="text-900 font-medium text-xl">12</div>
+                        </div>
+                        <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                            <i className="pi pi-map-marker text-orange-500 text-xl" />
+                        </div>
+                    </div>
+                    {/* <span className="text-green-500 font-medium">24 new </span>
+                    <span className="text-500">since last visit</span> */}
+                </div>
+            </div>            
+            <div className="col-12 lg:col-6 xl:col-3">
+                <div className="card mb-0">
+                    <div className="flex justify-content-between mb-3">
+                        <div>
+                            <span className="block text-500 font-medium mb-3">Total Revenue</span>
                             <div className="text-900 font-medium text-xl">16000</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-cyan-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                            <i className="pi pi-inbox text-cyan-500 text-xl" />
+                            <i className="pi pi-dollar text-green-500 text-x" />
                         </div>
                     </div>
                     {/* <span className="text-green-500 font-medium">520 </span>
@@ -169,11 +223,39 @@ const Dashboard = () => {
                             <div className="text-900 font-medium text-xl">15200</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-purple-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                            <i className="pi pi-comment text-purple-500 text-xl" />
+                            <i className="pi pi-paypal text-purple-500 text-xl" />
                         </div>
                     </div>
                     {/* <span className="text-green-500 font-medium">85 </span>
                     <span className="text-500">responded</span> */}
+                </div>
+            </div>
+            <div className="col-12 lg:col-6 xl:col-3">
+                <div className="card mb-0">
+                    <div className="flex justify-content-between mb-3">
+                        <div>
+                            <span className="block text-500 font-medium mb-3">Pending Amount</span>
+                            <div className="text-900 font-medium text-xl">800</div>
+                        </div>
+                        <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                            <i className="pi pi-dollar text-orange-500 text-xl" />
+                        </div>
+                    </div>
+                    {/* <span className="text-green-500 font-medium">24 new </span>
+                    <span className="text-500">since last visit</span> */}
+                </div>
+            </div>
+            <div className="col-12 lg:col-6 xl:col-3">
+                <div className="card mb-0">
+                    <div className="flex justify-content-between mb-3">
+                        <div>
+                            <span className="block text-500 font-medium mb-3">Payment Overdue</span>
+                            <div className="text-900 font-medium text-xl">100</div>
+                        </div>
+                        <div className="flex align-items-center justify-content-center bg-orange-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                            <i className="pi pi-comment text-purple-500 text-xl" />
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -312,6 +394,11 @@ const Dashboard = () => {
                 <div className="card">
                     <h5>Overview of enquires and orders</h5>
                     <Chart type="line" data={lineData} options={lineOptions} />
+                </div>
+
+                <div className="card">
+                    <h5>Overview of Revenue</h5>
+                    <Chart type="line" data={lineData1} options={lineOptions} />
                 </div>
 
                 {/* <div className="card">

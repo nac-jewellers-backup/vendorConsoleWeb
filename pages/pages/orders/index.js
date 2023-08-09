@@ -14,6 +14,7 @@ import { Badge } from 'primereact/badge';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode } from 'primereact/api';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { getSession } from '../../util';
 
 
 const Orders = () => {
@@ -69,6 +70,25 @@ const Orders = () => {
             orderid: { value: '', matchMode: FilterMatchMode.CONTAINS }
         });
     };
+
+    useEffect(() => {
+        const getData = async () => {
+            setLoaded(true);
+            const session = getSession();
+            if (!session) { router.push("/") }
+            await axios.post(`${process.env.API_URL}/list_orders`, { session: session }, { headers: { 'x-api-key': process.env.API_KEY } }).then((response) => {
+                console.log(response.data.result);
+                setUserList(response.data.result)
+                setLoaded(false);
+            }).catch((error) => {
+                console.log(error);
+            });
+
+        }
+        document.title = 'Admin Lists | NAC Admin';
+        getData();
+    }, []);
+
     const headerTemplate = () => {
         return (
             <div className='mx-2'>

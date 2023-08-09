@@ -1,13 +1,14 @@
 import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { classNames } from 'primereact/utils';
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
 import { LayoutContext } from './context/layoutcontext';
 import { Menu } from 'primereact/menu';
 import { Badge } from 'primereact/badge';
-
+import { resetUserSession } from '../pages/util';
 
 const AppTopbar = forwardRef((props, ref) => {
+    const router = useRouter();
     const { layoutConfig, layoutState, onMenuToggle, showProfileSidebar } = useContext(LayoutContext);
     const menubuttonRef = useRef(null);
     const topbarmenuRef = useRef(null);
@@ -18,6 +19,11 @@ const AppTopbar = forwardRef((props, ref) => {
         topbarmenu: topbarmenuRef.current,
         topbarmenubutton: topbarmenubuttonRef.current
     }));
+    const logout =()=>{
+        resetUserSession();
+        router.push('/')
+        
+    }
     const overlayMenuItems = [
         // {
         //     label: 'Profile',
@@ -31,11 +37,15 @@ const AppTopbar = forwardRef((props, ref) => {
         },
         {
             separator: true
-        },
+        },        
         {
-            label: 'Logout',
-            icon: 'pi pi-sign-out',
-            url: '/'
+            template: (item, options) => {
+                return (
+                    <button onClick={logout} className={classNames(options.className, 'w-full p-link flex align-items-center')}>
+                      <i className="pi pi-sign-out mr-2" /> Logout            
+                    </button>
+                )
+            }
         }
     ];
     const toggleMenu = (event) => {
@@ -43,7 +53,7 @@ const AppTopbar = forwardRef((props, ref) => {
     };
     return (
         <div className="layout-topbar">
-            <Link href="/" className="layout-topbar-logo">
+            <Link href="/dashboard" className="layout-topbar-logo">
                 <img src={`/layout/images/logo.png`} width="150px" height={'70px'} widt={'true'} alt="logo" />
             </Link>
 
@@ -58,13 +68,13 @@ const AppTopbar = forwardRef((props, ref) => {
             <div ref={topbarmenuRef} className={classNames('layout-topbar-menu', { 'layout-topbar-menu-mobile-active': layoutState.profileSidebarVisible })}>
                 <button type="button" className="p-link layout-topbar-button">
                     <i className="pi pi-bell p-overlay-badge" style={{ fontSize: '2rem' }}>
-                        <Badge value="2"></Badge>
+                        <Badge value="2" />
                     </i>
                     <span>Notification</span>
                 </button>
                 <Menu ref={menu} model={overlayMenuItems} popup />
                 <button type="button" className="p-link layout-topbar-button" onClick={toggleMenu}>
-                    <i className="pi pi-cog" style={{ fontSize: '2rem' }}></i>
+                    <i className="pi pi-cog" style={{ fontSize: '2rem' }} />
                     <span>Profile</span>
                 </button>
             </div>
