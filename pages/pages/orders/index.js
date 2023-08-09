@@ -73,19 +73,20 @@ const Orders = () => {
 
     useEffect(() => {
         const getData = async () => {
-            setLoaded(true);
+            // setLoaded(true);
+            setLoaded(false);
             const session = getSession();
             if (!session) { router.push("/") }
-            await axios.post(`${process.env.API_URL}/list_orders`, { session: session }, { headers: { 'x-api-key': process.env.API_KEY } }).then((response) => {
-                console.log(response.data.result);
-                setUserList(response.data.result)
-                setLoaded(false);
-            }).catch((error) => {
-                console.log(error);
-            });
+            // // await axios.post(`${process.env.API_URL}/list_orders`, { session: session }, { headers: { 'x-api-key': process.env.API_KEY } }).then((response) => {
+            // //     console.log(response.data.result);
+            // //     setUserList(response.data.result)
+            // //     setLoaded(false);
+            // // }).catch((error) => {
+            //     console.log(error);
+            // });
 
         }
-        document.title = 'Admin Lists | NAC Admin';
+        document.title = 'Order List | NAC Vendor';
         getData();
     }, []);
 
@@ -283,22 +284,18 @@ const Orders = () => {
         // }
     };
 
-    useEffect(() => {
-        const getData = async () => {
-            setLoaded(true);
-            setLoaded(false);
-        }
-        document.title = 'My Orders | NAC Vendor';
-        getData();
-    }, []);
 
     return (
         <>
             <DataTable
                 tableStyle={{ width: '100%' }} className='mb-4 datatable-responsive' scrollHeight="430px" size='small' scrollable showGridlines stripedRows paginator
-                header={headerTemplate} filters={filters} loading={loaded} emptyMessage={emptyMessage} paginatorTemplate={footerTemplate}
-                dataKey="id" value={userList} rows={10} sortMode="multiple" removableSort
+                header={headerTemplate} filters={filters} loading={loaded} emptyMessage={emptyMessage}
+                dataKey="id" value={userList} sortMode="multiple" removableSort
                 ref={dt} selectionMode="checkbox" selection={selectedList} onSelectionChange={(e) => setSelectedList(e.value)}
+                rows={10}
+                rowsPerPageOptions={[5, 10, 25, 50]}
+                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Orders"
             >
                 <Column
                     selectionMode="multiple" headerStyle={{ width: '2%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }}

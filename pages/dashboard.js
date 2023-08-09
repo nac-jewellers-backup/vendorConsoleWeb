@@ -11,7 +11,7 @@ const lineData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
         {
-            label: 'Enquires',
+            label: 'Enquiries',
             data: [65, 59, 80, 81, 56, 55, 40],
             fill: false,
             backgroundColor: '#2f4860',
@@ -33,7 +33,7 @@ const lineData1 = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
         // {
-        //     label: 'Enquires',
+        //     label: 'enquiries',
         //     data: [65, 59, 80, 81, 56, 55, 40],
         //     fill: false,
         //     backgroundColor: '#2f4860',
@@ -144,7 +144,7 @@ const Dashboard = () => {
                 <div className="card mb-0">
                     <div className="flex justify-content-between mb-3">
                         <div>
-                            <span className="block text-500 font-medium mb-3">Total Enquires</span>
+                            <span className="block text-500 font-medium mb-3">Total Enquiries</span>
                             <div className="text-900 font-medium text-xl">152</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
@@ -189,7 +189,7 @@ const Dashboard = () => {
                 <div className="card mb-0">
                     <div className="flex justify-content-between mb-3">
                         <div>
-                            <span className="block text-500 font-medium mb-3">Enquires Going to Expier</span>
+                            <span className="block text-500 font-medium mb-3">Enquiries Going to Expire</span>
                             <div className="text-900 font-medium text-xl">12</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
@@ -261,7 +261,11 @@ const Dashboard = () => {
 
             <div className="col-12 xl:col-6">
                 <div className="card">
-                    <h5>Recent 5 Enquires</h5>
+                    <h5>Overview of enquiries and orders</h5>
+                    <Chart type="line" data={lineData} options={lineOptions} />
+                </div>
+                <div className="card">
+                    <h5>Recent 5 Enquiries</h5>
                     <DataTable value={products} rows={5}  responsiveLayout="scroll">                       
                         <Column field="name" header="Title" sortable style={{ width: '35%' }} />
                         <Column field="price" header="Deadline" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
@@ -362,13 +366,14 @@ const Dashboard = () => {
                         </li>
                     </ul> */}
                 </div>
-                <div className="card">
-                    <h5>Overview of Revenue</h5>
-                    <Chart type="line" data={lineData1} options={lineOptions} />
-                </div>
+                
             </div>
 
             <div className="col-12 xl:col-6">
+                <div className="card">
+                    <h5>Revenue</h5>
+                    <Chart type="line" data={lineData1} options={lineOptions} />
+                </div>
                 <div className="card">
                     <h5>Recent 5 Orders</h5>
                     <DataTable value={products} rows={5}  responsiveLayout="scroll">
@@ -378,10 +383,7 @@ const Dashboard = () => {
                         <Column field="name" header="Amount" sortable style={{ width: '35%' }} />
                     </DataTable>
                 </div>
-                <div className="card">
-                    <h5>Overview of enquires and orders</h5>
-                    <Chart type="line" data={lineData} options={lineOptions} />
-                </div>
+                
 
                
 

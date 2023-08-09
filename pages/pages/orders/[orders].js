@@ -19,6 +19,7 @@ import { DataTable } from 'primereact/datatable';
 import { Badge } from 'primereact/badge';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Calendar } from 'primereact/calendar';
+import { getSession } from '../../util';
 
 
 export default function o() {
@@ -347,9 +348,11 @@ export default function o() {
             <>            
             <DataTable            
                 tableStyle={{ width: '100%' }} className='mb-4 datatable-responsive' scrollHeight="430px" size='small' scrollable showGridlines stripedRows paginator
-                header={headerTemplate} paginatorTemplate={footerTemplate}
-                dataKey="id" value={paymentList} rows={10} sortMode="multiple" removableSort
-                // ref={dt} selectionMode="checkbox" selection={selectedList} onSelectionChange={(e) => setSelectedList(e.value)}
+                header={headerTemplate}
+                dataKey="id" value={paymentList} rows={10} sortMode="multiple" removableSort                
+                rowsPerPageOptions={[5, 10, 25, 50]}
+                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Payments"
             >                
                 <Column
                     header='S.NO' headerStyle={{ 'minWidth': '60%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable

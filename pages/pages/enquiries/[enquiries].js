@@ -10,6 +10,8 @@ import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 import { Toolbar } from 'primereact/toolbar';
+import { getSession } from '../../util';
+
 
 export default function Enquire() {
     const router = useRouter();
@@ -84,7 +86,7 @@ export default function Enquire() {
 
     useEffect(() => {
         document.title = page + ' | NAC Vendor';
-        document.getElementById('navEnquire').classList.add('active-route');
+        document.getElementById('navEnquiries').classList.add('active-route');
     }, []);
     return (
         <>
@@ -160,14 +162,7 @@ export default function Enquire() {
                                     Enquire Status :
                                 </label>
                                 <span>Open</span>
-                            </div>
-                            <div className="flex align-items-center flex-wrap gap-2 mb-3">
-                                <label htmlFor="balanceamount" className="col-fixed w-9rem">
-                                    Balance Amount :
-                                </label>
-                                <span>4500</span>
-                            </div>
-
+                            </div>                          
                         </div>
                     </div>
                 </div>

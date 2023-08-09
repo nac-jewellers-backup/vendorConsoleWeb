@@ -17,11 +17,11 @@ import { getSession } from '../../util';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 
 
-const Enquire = () => {
+const Enquiries = () => {
     const [userList, setUserList] = useState([{
         id: uuid(),
-        title: 'Enquire regarding sample brouchers',
-        description: 'Enquire,iYou might enquire, or ask about, the difference between the words enquire and "inquire." Good question. The answer is, not much. They are the same word with different spellings. Typically the British prefer the "e" version, but both are correct.nquire (rather formal) to ask somebody for information: I called the station to enquire about train times.',
+        title: 'Enquiries regarding sample brouchers',
+        description: 'Enquiries,iYou might enquiries, or ask about, the difference between the words enquiries and "inquire." Good question. The answer is, not much. They are the same word with different spellings. Typically the British prefer the "e" version, but both are correct.nquire (rather formal) to ask somebody for information: I called the station to enquiries about train times.',
         status: 'Open',
         deadline: '27-Jul-2023'
     }]);
@@ -52,7 +52,7 @@ const Enquire = () => {
     };
     const confirm = (id) => {
         confirmDialog({
-            message: 'Do you want to delete this Enquire?',
+            message: 'Do you want to delete this Enquiries?',
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
@@ -73,10 +73,11 @@ const Enquire = () => {
 
     useEffect(() => {
         const getData = async () => {
-            setLoaded(true);
+             // setLoaded(true);
+             setLoaded(false);
             const session = getSession();
             if (!session) { router.push("/") }
-            // await axios.post(`${process.env.API_URL}/list_enquire`, { session: session }, { headers: { 'x-api-key': process.env.API_KEY } }).then((response) => {
+            // await axios.post(`${process.env.API_URL}/list_enquiries`, { session: session }, { headers: { 'x-api-key': process.env.API_KEY } }).then((response) => {
             //     console.log(response.data.result);
             //     setUserList(response.data.result)
             //     setLoaded(false);
@@ -85,25 +86,18 @@ const Enquire = () => {
             // });
 
         }
-        document.title = 'Admin Lists | NAC Admin';
+        document.title = 'My Enquiries List | NAC Vendor';
         getData();
     }, []);
 
+   
 
-    const postUser = () => {
-        if (mobile_number && mobile_number.length == 10) {
-            axios.post('https://rqc4db3lq5.execute-api.us-east-2.amazonaws.com/dev/verify', { tableName: "nac_cms_admin", mobile_number: mobile_number }, { headers: { 'x-api-key': '8DCiyiPd0f6ojQaYPwsH42IpPacBXf976Yt4TCIr' } })
-                .then(res => console.log(res.data))
-        } else {
-            validat_mob("Enter Valid Mobile No")
-        }
-    }
 
     const headerTemplate = () => {
         return (
             <div className='mx-2'>
                 <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center mt-1">
-                    <h5 className="m-0">My Enquires</h5>
+                    <h5 className="m-0">My Enquiries</h5>
                 </div>
                 <hr />
                 <div className='grid mt-3'>
@@ -181,7 +175,7 @@ const Enquire = () => {
     const exportExcel = () => {
         const ExcelJS = require('exceljs');
         const wb = new ExcelJS.Workbook();
-        const sheet = wb.addWorksheet('Enquire', { views: [{ state: 'frozen', xSplit: 1, ySplit: 1 }] });
+        const sheet = wb.addWorksheet('Enquiries', { views: [{ state: 'frozen', xSplit: 1, ySplit: 1 }] });
         var borderStyles = { top: { style: "thin" }, left: { style: "thin" }, bottom: { style: "thin" }, right: { style: "thin" } };
         sheet.columns = [
             { header: '#', key: 'id' },
@@ -220,7 +214,7 @@ const Enquire = () => {
             const url = window.URL.createObjectURL(blob);
             const anchor = document.createElement('a');
             anchor.href = url;
-            anchor.download = `Enquires - ${moment(new Date()).format('DD-MM-YYYY HH:mm:ss')}.xlsx`;
+            anchor.download = `Enquiries - ${moment(new Date()).format('DD-MM-YYYY HH:mm:ss')}.xlsx`;
             anchor.click();
             window.URL.revokeObjectURL(url);
         });
@@ -233,13 +227,13 @@ const Enquire = () => {
             <>
                 <Toast ref={toast} />
                 <ConfirmDialog />
-                <Button icon="pi pi-eye" severity="primary" className="mr-1 w-auto h-auto" tooltip="View Enquire" tooltipOptions={{ position: 'top' }} text onClick={() => router.push(`/pages/enquire/${rowData.id}`)} />
+                <Button icon="pi pi-eye" severity="primary" className="mr-1 w-auto h-auto" tooltip="View Enquiries" tooltipOptions={{ position: 'top' }} text onClick={() => router.push(`/pages/enquiries/${rowData.id}`)} />
                 {/* <Button icon="pi pi-trash" severity="danger" className="ml-1 w-auto h-auto" tooltip="Delete Admin" tooltipOptions={{ position: 'top' }} text onClick={() => confirm(rowData.id)} /> */}
             </>
         )
     };
     const emptyMessage = () => {
-        return <h5 className='text-center pt-1' style={{ fontSize: '1em' }}>No Enquire to Display</h5>
+        return <h5 className='text-center pt-1' style={{ fontSize: '1em' }}>No Enquiries to Display</h5>
     };
     const footerTemplate = {
         layout: 'RowsPerPageDropdown CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
@@ -253,7 +247,7 @@ const Enquire = () => {
             );
         },
         CurrentPageReport: (options) => {
-            const name = (options.totalRecords > 1) ? 'Enquire' : 'Enquire'
+            const name = (options.totalRecords > 1) ? 'Enquiries' : 'Enquiries'
             return (
                 <div className='center_item'>
                     <span style={{ color: 'var(--text-color)', userSelect: 'none', width: 'auto', textAlign: 'center' }}>
@@ -308,15 +302,7 @@ const Enquire = () => {
         }
     };
 
-    useEffect(() => {
-        const getData = async () => {
-            setLoaded(true);
-            setLoaded(false);
-        }
-        document.title = 'My Enquires | NAC Vendor';
-        getData();
-    }, []);
-
+   
     return (
         <>
             <DataTable
@@ -325,7 +311,7 @@ const Enquire = () => {
                 rows={10}
                 rowsPerPageOptions={[5, 10, 25, 50]}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Enquire"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Enquiries"
 
                 dataKey="id" value={userList} sortMode="multiple" removableSort
                 ref={dt} selectionMode="checkbox" selection={selectedList} onSelectionChange={(e) => setSelectedList(e.value)}
@@ -359,4 +345,4 @@ const Enquire = () => {
     );
 };
 
-export default Enquire;
+export default Enquiries;

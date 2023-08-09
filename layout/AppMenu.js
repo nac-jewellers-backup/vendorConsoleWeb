@@ -10,7 +10,7 @@ const AppMenu = () => {
                 // { label: 'Admin Lists', icon: 'pi pi-fw pi-user', to: '/pages/admin', id: 'navAdmin' },
                 { label: 'Login', icon: 'pi pi-fw pi-user', to: '/', id: 'navLogin' },
                 // { label: 'Forgot Password', icon: 'pi pi-fw pi-user', to: '/pages/forgot_password', id: 'navForgotpass' },
-                { label: 'My Enquires', icon: 'pi pi-fw pi-list', to: '/pages/enquire', id: 'navEnquire' },
+                { label: 'My Enquiries', icon: 'pi pi-fw pi-list', to: '/pages/enquiries', id: 'navEnquiries' },
                 { label: 'My Orders', icon: 'pi pi-fw pi-compass', to: '/pages/orders', id: 'navOrder' },
                 { label: 'Payment List', icon: 'pi pi-fw pi-dollar', to: '/pages/payment', id: 'navPayment' }
             ]
