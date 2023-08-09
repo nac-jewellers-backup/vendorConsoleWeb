@@ -262,11 +262,11 @@ const Dashboard = () => {
             <div className="col-12 xl:col-6">
                 <div className="card">
                     <h5>Recent 5 Enquires</h5>
-                    <DataTable value={products} rows={5} paginator responsiveLayout="scroll">
-                        {/* <Column header="Image" body={(data) => <img className="shadow-2" src={`/demo/images/product/${data.image}`} alt={data.image} width="50" />} /> */}
-                        <Column field="name" header="Name" sortable style={{ width: '35%' }} />
-                        <Column field="price" header="Price" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
-                        <Column
+                    <DataTable value={products} rows={5}  responsiveLayout="scroll">                       
+                        <Column field="name" header="Title" sortable style={{ width: '35%' }} />
+                        <Column field="price" header="Deadline" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
+                        <Column field="name" header="Status" sortable style={{ width: '35%' }} />
+                        {/* <Column
                             header="View"
                             style={{ width: '15%' }}
                             body={() => (
@@ -274,26 +274,17 @@ const Dashboard = () => {
                                     <Button icon="pi pi-search" type="button" text />
                                 </>
                             )}
-                        />
+                        /> */}
                     </DataTable>
                 </div>
                 
-                <div className="card">
+                <div className="col-12 xl:col-12">
                     <div className="card">
                         <h5>Recent 5 Payments</h5>
-                        <DataTable value={products} rows={5} paginator responsiveLayout="scroll">
-                            {/* <Column header="Image" body={(data) => <img className="shadow-2" src={`/demo/images/product/${data.image}`} alt={data.image} width="50" />} /> */}
-                            <Column field="name" header="Name" sortable style={{ width: '35%' }} />
-                            <Column field="price" header="Price" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
-                            <Column
-                                header="View"
-                                style={{ width: '15%' }}
-                                body={() => (
-                                    <>
-                                        <Button icon="pi pi-search" type="button" text />
-                                    </>
-                                )}
-                            />
+                        <DataTable value={products} rows={5}  responsiveLayout="scroll">                            
+                            <Column field="name" header="Order Id" sortable style={{ width: '35%' }} />
+                            <Column field="price" header="Transaction Id" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
+                            <Column field="name" header="Payment Date" sortable style={{ width: '35%' }} />                            
                         </DataTable>
                     </div>
                     {/* <ul className="list-none p-0 m-0">
@@ -371,24 +362,20 @@ const Dashboard = () => {
                         </li>
                     </ul> */}
                 </div>
+                <div className="card">
+                    <h5>Overview of Revenue</h5>
+                    <Chart type="line" data={lineData1} options={lineOptions} />
+                </div>
             </div>
 
             <div className="col-12 xl:col-6">
                 <div className="card">
                     <h5>Recent 5 Orders</h5>
-                    <DataTable value={products} rows={5} paginator responsiveLayout="scroll">
+                    <DataTable value={products} rows={5}  responsiveLayout="scroll">
                         {/* <Column header="Image" body={(data) => <img className="shadow-2" src={`/demo/images/product/${data.image}`} alt={data.image} width="50" />} /> */}
-                        <Column field="name" header="Name" sortable style={{ width: '35%' }} />
-                        <Column field="price" header="Price" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
-                        <Column
-                            header="View"
-                            style={{ width: '15%' }}
-                            body={() => (
-                                <>
-                                    <Button icon="pi pi-search" type="button" text />
-                                </>
-                            )}
-                        />
+                        <Column field="name" header="Order Id" sortable style={{ width: '35%' }} />
+                        <Column field="price" header="Order Date" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} />
+                        <Column field="name" header="Amount" sortable style={{ width: '35%' }} />
                     </DataTable>
                 </div>
                 <div className="card">
@@ -396,10 +383,7 @@ const Dashboard = () => {
                     <Chart type="line" data={lineData} options={lineOptions} />
                 </div>
 
-                <div className="card">
-                    <h5>Overview of Revenue</h5>
-                    <Chart type="line" data={lineData1} options={lineOptions} />
-                </div>
+               
 
                 {/* <div className="card">
                     <div className="flex align-items-center justify-content-between mb-4">

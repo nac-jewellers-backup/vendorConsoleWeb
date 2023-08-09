@@ -160,47 +160,6 @@
             ]
 		},
 		{
-			"id": "1005",
-			"code": "av2231fwg",
-			"name": "Brown Purse",
-			"description": "Product Description",
-			"image": "brown-purse.jpg",
-			"price": 120,
-			"category": "Accessories",
-			"quantity": 0,
-			"inventoryStatus": "OUTOFSTOCK",
-            "rating": 4,
-            "orders": [
-                {
-                    "id": "6000",
-                    "productCode": "av2231fwg",
-                    "date": "2020-01-25",
-                    "amount": 120,
-                    "quantity": 1,
-                    "customer": "Isabel Sinclair",
-                    "status": "RETURNED"
-                },
-                {
-                    "id": "6001",
-                    "productCode": "av2231fwg",
-                    "date": "2019-03-12",
-                    "amount": 240,
-                    "quantity": 2,
-                    "customer": "Lionel Clifford",
-                    "status": "DELIVERED"
-                },
-                {
-                    "id": "6002",
-                    "productCode": "av2231fwg",
-                    "date": "2019-05-05",
-                    "amount": 120,
-                    "quantity": 1,
-                    "customer": "Cody Chavez",
-                    "status": "DELIVERED"
-                }
-            ]
-		},
-		{
 			"id": "1006",
 			"code": "bib36pfvm",
 			"name": "Chakra Bracelet",
