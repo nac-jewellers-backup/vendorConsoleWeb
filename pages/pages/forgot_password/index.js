@@ -28,15 +28,31 @@ const LoginPage = () => {
         e.preventDefault();
         if (mobile_number && mobile_number.length == 10) {
             await axios.post(`${process.env.API_URL}/verify`, { tableName: "nac_cms_vendor", mobile_number: mobile_number }, { headers: { 'x-api-key': process.env.API_KEY } })
-                .then(res => { console.log(res.data); setIsNumber('otp'); setOtp(res.data.data.otp); setForgot_password({ ...forgot_password, ['id']: res.data.data.id }); validat_mob(''); }).catch(err => console.log(err.response))
+                .then(res => { console.log(res.data); setIsNumber('otp'); setOtp(res.data.data.otp); setForgot_password({ ...forgot_password, ['id']: res.data.data.id }); validat_mob(''); }
+                ).catch(err => {
+                    console.log(err.response)
+                    validat_mob(err.response.data.message)
+                })
         } else { validat_mob("Enter Valid Mobile No") }
+    }
+
+
+    const checkOtp = (e) => {
+        e.preventDefault();        
+        if(otp.toString() === confirmOtp.toString()){
+            setIsNumber(''),
+            validat_mob('')
+        }
+        else{
+            validat_mob('Enter Correct OTP')
+        }
     }
 
 
     const postpassword = async (e) => {
         e.preventDefault();
         const passwordPattern = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,8}$/);
-        (otp.toString() === confirmOtp.toString()) ? setIsNumber('') : validat_mob('Enter Correct OTP');
+        // (otp.toString() === confirmOtp.toString()) ? setIsNumber('') : validat_mob('Enter Correct OTP');
         const { new_password, confirmPassword } = password;
         const checkpassword = passwordPattern.test(new_password);        
         validat_mob("")
@@ -56,10 +72,6 @@ const LoginPage = () => {
 
     }
 
-    const checkOtp = (e) => {
-        e.preventDefault();
-        (otp.toString() === confirmOtp.toString()) ? setIsNumber('') : validat_mob('Enter Correct OTP');
-    }
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -75,7 +87,7 @@ const LoginPage = () => {
         <>
             <div className={containerClassName}>
                 <div className="flex flex-column align-items-center justify-content-center">
-                    <img src={`/layout/images/logo.png`} alt="Sakai logo" className="mb-3" />
+                    <img src={`/layout/images/logo.png`} alt="NAC logo" className="mb-3" />
                     <div style={{ borderRadius: '56px', padding: '0.3rem', background: 'linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)' }}>
                         <div className="w-full surface-card py-8 px-5 sm:px-8" style={{ borderRadius: '53px' }}>
                             {isNumber === 'number' ?
