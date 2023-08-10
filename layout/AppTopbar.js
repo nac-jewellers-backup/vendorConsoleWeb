@@ -5,7 +5,7 @@ import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'reac
 import { LayoutContext } from './context/layoutcontext';
 import { Menu } from 'primereact/menu';
 import { Badge } from 'primereact/badge';
-import { resetUserSession } from '../pages/util';
+import { resetUserSession } from '../util';
 
 const AppTopbar = forwardRef((props, ref) => {
     const router = useRouter();
@@ -22,7 +22,7 @@ const AppTopbar = forwardRef((props, ref) => {
     const logout =()=>{
         resetUserSession();
         router.push('/')
-        
+
     }
     const overlayMenuItems = [
         // {
@@ -37,12 +37,12 @@ const AppTopbar = forwardRef((props, ref) => {
         },
         {
             separator: true
-        },        
+        },
         {
             template: (item, options) => {
                 return (
                     <button onClick={logout} className={classNames(options.className, 'w-full p-link flex align-items-center')}>
-                      <i className="pi pi-sign-out mr-2" /> Logout            
+                      <i className="pi pi-sign-out mr-2" /> Logout
                     </button>
                 )
             }

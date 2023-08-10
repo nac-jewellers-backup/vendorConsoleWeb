@@ -14,7 +14,7 @@ import { Badge } from 'primereact/badge';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode } from 'primereact/api';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
-import { getSession } from '../../util';
+import { getSession } from '../../../util';
 
 
 const Orders = () => {
@@ -28,8 +28,8 @@ const Orders = () => {
         paidamount: '7500',
         balanceamount: '4500'
     }]);
-    
-  
+
+
     const [filters, setFilters] = useState({
         title: { value: '', matchMode: FilterMatchMode.CONTAINS },
         description: { value: '', matchMode: FilterMatchMode.CONTAINS },
@@ -94,7 +94,7 @@ const Orders = () => {
         return (
             <div className='mx-2'>
                 <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center mt-1">
-                    <h5 className="m-0">My Orders</h5>                    
+                    <h5 className="m-0">My Orders</h5>
                 </div>
                 <hr />
                 <div className='grid mt-3'>
@@ -111,14 +111,14 @@ const Orders = () => {
                             />
                             <label htmlFor="title">Search by Title</label>
                         </span>
-                    </div>  
+                    </div>
                     <div className="field col-12 md:col-2">
                         <span className="p-float-label">
                             <InputText
                                 id="searchDescription"
                                 keyfilter={/^[^<>*!]+$/}
                                 className='w-full'
-                                autoComplete='off' 
+                                autoComplete='off'
                                 value={filters.description.value}
                                 onChange={(e) => setFilters({ ...filters, description: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
                                 onKeyDown={(e) => setFilters({ ...filters, description: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
@@ -139,7 +139,7 @@ const Orders = () => {
                             />
                             <label htmlFor="searchOrderId">Search by Order Id</label>
                         </span>
-                    </div>                  
+                    </div>
                     {/* <div className="field col-12 md:col-2">
                         <span className="p-float-label">
                             <Dropdown id="dropdown" options={paymentstatus} value={filters.paymentstatus.value} onChange={(e) => setFilters({ ...filters, paymentstatus: { value: e.target.value, matchMode: FilterMatchMode.EQUALS } })} optionLabel="name" className='w-full' />
@@ -209,7 +209,7 @@ const Orders = () => {
             <>
                 <Toast ref={toast} />
                 <ConfirmDialog />
-                <Button icon="pi pi-eye" severity="primary" className="mr-1 w-auto h-auto" tooltip="View Orders" tooltipOptions={{ position: 'top' }} text onClick={() => router.push(`/pages/orders/${rowData.id}`)} />                
+                <Button icon="pi pi-eye" severity="primary" className="mr-1 w-auto h-auto" tooltip="View Orders" tooltipOptions={{ position: 'top' }} text onClick={() => router.push(`/pages/orders/${rowData.id}`)} />
             </>
         )
     };
@@ -217,7 +217,7 @@ const Orders = () => {
         return <h5 className='text-center pt-1' style={{ fontSize: '1em' }}>No Orders to Display</h5>
     };
     const footerTemplate = {
-        
+
         CurrentPageReport: (options) => {
             const name = (options.totalRecords > 1) ? 'Orders' : 'Orders'
             return (

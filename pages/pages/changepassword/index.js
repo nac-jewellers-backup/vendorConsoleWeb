@@ -2,7 +2,7 @@ import React, { useState , useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import axios from 'axios';
-import {getSession} from '../../util'
+import {getSession} from '../../../util'
 import { useRouter } from 'next/router';
 
 function FormLayoutDemo(){
@@ -41,13 +41,13 @@ const postUser = async(e) => {
     if(mobile_number && mobile_number.length ==10){
        await axios.post(`${process.env.API_URL}/verify`, { tableName: "nac_cms_vendor", mobile_number:mobile_number},{headers:{'x-api-key':process.env.API_KEY }})
     .then(res => {
-        const {data} = res.data;        
+        const {data} = res.data;
             console.log(res.data);
-            // validat_mob("Valid No") 
+            // validat_mob("Valid No")
             setMobile_vefiy(0)
             setOtp_vefiy(1)
             setConfirmOtp(data.otp);
-            setChange_password({ ...change_password, ['id']: res.data.data.id }); 
+            setChange_password({ ...change_password, ['id']: res.data.data.id });
     }
     ).catch(err=>{
         console.log(err.response.data);
@@ -71,12 +71,12 @@ const check_otp =()=>{
 }
 
 // Create New Password
-const postpassword = async(e) => {   
+const postpassword = async(e) => {
     e.preventDefault();
     const passwordPattern = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,8}$/);
         (otp.toString() === confirmOtp.toString()) ? setIsNumber('') : validat_chpwd('Enter Correct OTP');
         const { old_password,new_password, confirmPassword } = change_password;
-        const checkpassword = passwordPattern.test(new_password);        
+        const checkpassword = passwordPattern.test(new_password);
         validat_chpwd("")
         if (!old_password) {
             validat_chpwd("Enter the Old Password")
@@ -85,7 +85,7 @@ const postpassword = async(e) => {
         } else if (!confirmPassword) {
             validat_chpwd("Enter the confirm Password")
         } else if (!checkpassword) {
-            validat_chpwd("Password should be Minimum eight to nine characters, at least one uppercase letter, one lowercase letter, one number and one special character");            
+            validat_chpwd("Password should be Minimum eight to nine characters, at least one uppercase letter, one lowercase letter, one number and one special character");
         } else if (new_password !== confirmPassword) {
             validat_chpwd("Password mismatched")
         } else if (old_password === new_password) {
@@ -93,7 +93,7 @@ const postpassword = async(e) => {
         } else {
         console.log(change_password)
        await axios.post(`${process.env.API_URL}/change_password`, {session:getSession(),  request:change_password}, {headers:{'x-api-key':process.env.API_KEY }})
-        .then(res => {        
+        .then(res => {
         console.log(res.data);
         router.push("/indexDesign");
         }
@@ -113,7 +113,7 @@ const postpassword = async(e) => {
                     <h5>Enter Your Mobile No</h5>
                     <div className="p-fluid formgrid grid">
                         <div className="field col-12 md:col-12">
-                            <label htmlFor="mobile_number">Mobile No</label>  
+                            <label htmlFor="mobile_number">Mobile No</label>
                             <InputText
                                 type="text"
                                 id="contactpersonNo"
@@ -164,7 +164,7 @@ const postpassword = async(e) => {
                     <div className="p-fluid formgrid grid">
                         <div className="field col-12 md:col-12">
                             <label htmlFor="old_password">Old Password</label>
-                            <InputText id="old_password" type="text" placeholder='******' 
+                            <InputText id="old_password" type="text" placeholder='******'
                             value={change_password.old_password} onChange={handleChange} maxLength={8}/>
                         </div>
                         <div className="field col-12 md:col-12">

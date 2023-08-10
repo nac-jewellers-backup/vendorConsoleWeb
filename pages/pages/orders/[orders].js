@@ -19,7 +19,7 @@ import { DataTable } from 'primereact/datatable';
 import { Badge } from 'primereact/badge';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Calendar } from 'primereact/calendar';
-import { getSession } from '../../util';
+import { getSession } from '../../../util';
 
 
 export default function o() {
@@ -28,7 +28,7 @@ export default function o() {
     let emptyInvoice = {
         invoiceidcre: null,
         duedate: '',
-        amount: null,        
+        amount: null,
         invoice: null
     };
 
@@ -38,7 +38,7 @@ export default function o() {
     const [ordersList, setOrdersList] = useState({ id: uuid(), orderid: '1', invoiceid:'ABC1',orderamount: '12000', paidamount: '7500',balanceamount:'4500' });
     const [invoiceList, setInvoiceList] = useState({ id: uuid(), invoiceidcre: '',duedate:'',amount:'', invoice: ''});
 
-    
+
     const [invoiceDialog, setInvoiceDialog] = useState(false);
     const [selectedinvoice, setSelectedInvoice] = useState(null);
     const [submitted, setSubmitted] = useState(false);
@@ -47,33 +47,33 @@ export default function o() {
     const [adminList, setAdminList] = useState({ id: uuid(), userName: '', userPassword: '', userMobile: '', userEmail: '', userRole: '', userStatus: '', createdOn: '' });
     const toast = useRef(null);
     const [paymentList, setPaymentList] = useState([{
-        id: uuid(),        
+        id: uuid(),
         sno: '1',
         paymentdate: '27-Jul-2023',
-        totalamount: '12000',        
+        totalamount: '12000',
         paidamount: '7500',
         balanceamount: '4500',
         modeofpayment: 'Cash',
         transactionid: 'ASD12'
     }]);
 
-    
-   
 
-   
+
+
+
 
     const headerTemplate = () => {
         return (
             <div className='mx-2'>
                 <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center mt-1">
-                    <h5 className="m-0">Payment Details</h5>                    
+                    <h5 className="m-0">Payment Details</h5>
                 </div>
-                <hr />                
+                <hr />
             </div>
         )
     };
 
-   
+
     const adminStatus = [
         { name: 'Active', code: 'Active' },
         { name: 'Inactive', code: 'Inactive' }
@@ -101,11 +101,11 @@ export default function o() {
         const { id, value } = event.target;
         setAdminList({ ...adminList, [id]: value })
     };
-    
+
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(invoiceList, "fffff")
-        if (!invoiceList.invoiceidcre) { toastAlert('Enter the Invoice Id'); }        
+        if (!invoiceList.invoiceidcre) { toastAlert('Enter the Invoice Id'); }
         else if (!invoiceList.duedate) { toastAlert('Enter the Due Date'); }
         else if (!invoiceList.amount) { toastAlert('Enter the amount'); }
         else if (!invoiceList.invoice) { toastAlert('Upload the Invoice'); }
@@ -138,7 +138,7 @@ export default function o() {
             if (invoice.invoiceidcre) {
                 const index = findIndexById(invoice.invoiceidcre);
 
-                
+
             } else {
                 _invoice.invoiceidcre = createId();
                 _invoice.duedate = createId();
@@ -148,7 +148,7 @@ export default function o() {
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
-           
+
             setInvoiceDialog(false);
             setInvoice(emptyInvoice);
         }
@@ -176,20 +176,20 @@ export default function o() {
     };
 
 
-   
 
-   
+
+
     const leftToolbarTemplate = () => {
         return (
             <React.Fragment>
                 {/* <FileUpload mode="basic" accept="image/*" maxFileSize={1000000} label="Import" chooseLabel="Import" className="mr-2 inline-block" /> */}
-              
+
             </React.Fragment>
         );
     };
 
 
- 
+
 
 
 
@@ -218,9 +218,9 @@ export default function o() {
             <Button type="submit" label="Save" icon="pi pi-check" text onClick={saveInvoice} />
         </>
     );
-   
+
     const customBase64Uploader = async (event) => {
-        // convert file to base64 encoded        
+        // convert file to base64 encoded
         console.log(event.files.length);
         if (event.files.length > 0) {
             const files = event.files[0];
@@ -258,11 +258,11 @@ export default function o() {
                 </div>
             );
         },
-       
-        
+
+
     };
 
-   
+
     useEffect(() => {
         document.title = page + ' | NAC Vendor';
         document.getElementById('navOrder').classList.add('active-route');
@@ -276,30 +276,30 @@ export default function o() {
                     <h5 className="m-0">{page}</h5>
                     <span className="block md:mt-0 p-input-icon-left">
                         {/* <Button icon={`pi pi-${orders === 'new' ? 'plus' : 'pencil'}`} severity="success" className="mr-1" tooltip={page} tooltipOptions={{ position: 'top' }} disabled={false}/> */}
-                        <Button label="Invoice Details" type='button' icon="pi pi-plus" severity="sucess" className="mr-2" onClick={openNew} />                   
+                        <Button label="Invoice Details" type='button' icon="pi pi-plus" severity="sucess" className="mr-2" onClick={openNew} />
                         <Button icon="pi pi-arrow-left" severity="danger" className="ml-1" type='button' tooltip="Go Back" tooltipOptions={{ position: 'top' }} onClick={() => router.push('/pages/orders')} />
                     </span>
                 </div>
                 <hr />
                 <div className='mt-3'>
                 <Dialog visible={invoiceDialog} style={{ width: '505px' }} header="Invoice Details" type="button" modal className="p-fluid" footer={invoiceDialogFooter} onHide={hideDialog}>
-                       
+
                         <div className="field">
                             <label htmlFor="invoiceidcre">Invoice No.</label>
-                            <InputText id="invoiceidcre"  onChange={(e) => onInputChange(e, 'invoiceidcre')} required autoFocus  />       
-                            {submitted && !invoice.invoiceidcre && <small className="p-invalid">Invoice No. is required.</small>}                     
+                            <InputText id="invoiceidcre"  onChange={(e) => onInputChange(e, 'invoiceidcre')} required autoFocus  />
+                            {submitted && !invoice.invoiceidcre && <small className="p-invalid">Invoice No. is required.</small>}
                         </div>
                         <div className="field">
                             <label htmlFor="duedate">Due Date</label>
                             <Calendar inputId="calendar" id="duedate" required showIcon></Calendar>
-                            {submitted && !invoice.calendar && <small className="p-invalid">Due Date is required.</small>} 
+                            {submitted && !invoice.calendar && <small className="p-invalid">Due Date is required.</small>}
                         </div>
                         <div className="formgrid grid">
                             <div className="field col">
                                 <label htmlFor="amount">Amount</label>
                                 <InputNumber id="amount"  onValueChange={(e) => onInputNumberChange(e, 'amount')} mode="currency" currency="INR" locale="en-INDIA" required />
-                                {submitted && !invoice.amount && <small className="p-invalid">Amount is required.</small>} 
-                            </div>                           
+                                {submitted && !invoice.amount && <small className="p-invalid">Amount is required.</small>}
+                            </div>
                         </div>
                         <div className="formgrid grid">
                             <label htmlFor="invoice" className="col-fixed w-9rem">
@@ -342,18 +342,18 @@ export default function o() {
                         <span>4500</span>
                     </div>
                     </div>
-                </div> 
-            </div>           
-            
-            <>            
-            <DataTable            
+                </div>
+            </div>
+
+            <>
+            <DataTable
                 tableStyle={{ width: '100%' }} className='mb-4 datatable-responsive' scrollHeight="430px" size='small' scrollable showGridlines stripedRows paginator
                 header={headerTemplate}
-                dataKey="id" value={paymentList} rows={10} sortMode="multiple" removableSort                
+                dataKey="id" value={paymentList} rows={10} sortMode="multiple" removableSort
                 rowsPerPageOptions={[5, 10, 25, 50]}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Payments"
-            >                
+            >
                 <Column
                     header='S.NO' headerStyle={{ 'minWidth': '60%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
                     field='sno' filterField="sno" className='text-start'
@@ -365,11 +365,11 @@ export default function o() {
                  <Column
                     header='Total Amount' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
                     field='totalamount' filterField="totalamount" className='text-start'
-                />                
+                />
                 <Column
                     header='Paid Amount' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
                     field='paidamount' filterField="paidamount" className='text-start'
-                />               
+                />
                 <Column
                     header='Balance Amount' headerStyle={{ width: '4%', backgroundColor: '#d7e4fc', whiteSpace: 'nowrap' }} sortable
                     field='balanceamount' filterField="balanceamount" className='text-center'

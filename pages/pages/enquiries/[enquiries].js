@@ -10,7 +10,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 import { Toolbar } from 'primereact/toolbar';
-import { getSession } from '../../util';
+import { getSession } from '../../../util';
 
 
 export default function Enquire() {
@@ -46,7 +46,7 @@ export default function Enquire() {
         setEnquireList({ ...enquireList, [id]: value })
     };
     const customBase64Uploader = async (event) => {
-        // convert file to base64 encoded        
+        // convert file to base64 encoded
         console.log(event.files.length);
         if (event.files.length > 0) {
             const files = event.files[0];
@@ -138,7 +138,7 @@ export default function Enquire() {
                                 </label>
                                 <InputText id="amount" keyfilter="money" value={enquireList.amount} onChange={handleChange} />
                                 onChange={(e) => setAmount(e.target.value)}
-                            </div>                            
+                            </div>
                         </div> */}
                         <div className="col-12 lg:col-12">
                             <div className="flex align-items-center flex-wrap gap-2 mb-3">
@@ -164,7 +164,7 @@ export default function Enquire() {
                                     Enquire Status :
                                 </label>
                                 <span>Open</span>
-                            </div>                          
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -190,7 +190,7 @@ export default function Enquire() {
                             {/* <FileUpload mode="basic" accept="application/pdf" id="quotation" maxFileSize={1024000} label="Upload" chooseLabel="Upload" customUpload uploadHandler={customBase64Uploader} className="mr-2 inline-block" /> */}
                             {/* <InputText id="email" value={enquireList.description}  onChange={(e) => setEmail(e.target.value)} required className="p-invalid" />                         */}
                             <FileUpload name="demo[]" url={'/api/upload'} accept="application/pdf" maxFileSize={1000000} />
-                           
+
                         </div>
 
                         <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
@@ -202,9 +202,9 @@ export default function Enquire() {
                     </div>
 
                 </div>
-                
+
             </form>
-            
+
         </>
     )
 }

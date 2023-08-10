@@ -8,7 +8,7 @@ import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import { useTimeout } from 'primereact/hooks';
 import { LayoutContext } from '../layout/context/layoutcontext';
-import { getSession, setUserSession } from '../pages/util';
+import { getSession, setUserSession } from '../util';
 
 const LoginPage = () => {
     const [login, setLogin] = useState({ tableName: 'nac_cms_vendor', mobile_number: '', password: '' });

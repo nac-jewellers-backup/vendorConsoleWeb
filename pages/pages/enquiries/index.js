@@ -13,10 +13,8 @@ import { Toast } from 'primereact/toast';
 import { Badge } from 'primereact/badge';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode } from 'primereact/api';
-import { getSession } from '../../util';
+import { getSession } from '../../../util';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
-
-
 
 const Enquiries = () => {
 
@@ -92,7 +90,7 @@ const Enquiries = () => {
         getData();
     }, []);
 
-   
+
 
 
     const headerTemplate = () => {
@@ -131,36 +129,6 @@ const Enquiries = () => {
                             <label htmlFor="searchDescription">Search by Description</label>
                         </span>
                     </div>
-                    {/* <div className="field col-12 md:col-2">
-                        <span className="p-float-label">
-                            <InputText
-                                keyfilter="pint"
-                                className='w-full'
-                                autoComplete='off'
-                                maxLength={10}
-                                value={filters.description.value}
-                                onChange={(e) => setFilters({ ...filters, description: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
-                                onKeyDown={(e) => setFilters({ ...filters, description: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS } })}
-                            />
-                            <label htmlFor="username">Search by Mobile</label>
-                        </span>
-                    </div> */}
-                    {/* <div className="field col-12 md:col-2">
-                        <span className="p-float-label">
-                            <InputText
-                                keyfilter="email"
-                                className='w-full'
-                                autoComplete='off'
-                            />
-                            <label htmlFor="username">Search by Email</label>
-                        </span>
-                    </div> */}
-                    {/* <div className="field col-12 md:col-2">
-                        <span className="p-float-label">
-                            <Dropdown id="dropdown" options={adminRole} value={filters.userRole.value} onChange={(e) => setFilters({ ...filters, userRole: { value: e.target.value, matchMode: FilterMatchMode.EQUALS } })} optionLabel="name" className='w-full' />
-                            <label htmlFor="dropdown">Select Role</label>
-                        </span>
-                    </div> */}
                     <div className="field col-12 md:col-2">
                         <span className="p-float-label">
                             <Dropdown id="dropdown" options={adminStatus} value={filters.status.value} onChange={(e) => setFilters({ ...filters, status: { value: e.target.value, matchMode: FilterMatchMode.EQUALS } })} optionLabel="name" className='w-full' />
@@ -174,53 +142,6 @@ const Enquiries = () => {
             </div>
         )
     };
-    const exportExcel = () => {
-        const ExcelJS = require('exceljs');
-        const wb = new ExcelJS.Workbook();
-        const sheet = wb.addWorksheet('Enquiries', { views: [{ state: 'frozen', xSplit: 1, ySplit: 1 }] });
-        var borderStyles = { top: { style: "thin" }, left: { style: "thin" }, bottom: { style: "thin" }, right: { style: "thin" } };
-        sheet.columns = [
-            { header: '#', key: 'id' },
-            { header: 'Category Name', key: 'name' },
-            { header: 'Product Count', key: 'product' },
-            { header: 'Created By', key: 'created_name' },
-            { header: 'Created On', key: 'created_on', style: { numFmt: 'DD-MMM-YYYY' } },
-            { header: 'Status', key: 'status' }
-        ];
-        selectedList.map((selected, index) => (
-            sheet.addRow({
-                id: index + 1,
-                name: selected.name,
-                product: parseInt(selected.product),
-                created_name: selected.created_name,
-                created_on: moment(selected.created_on).format('DD-MMM-YYYY'),
-                status: selected.status
-            })
-        ));
-        sheet.getRow(1).font = { bold: true, size: 11 };
-        sheet.columns.forEach(function (column) {
-            let maxLength = 0;
-            column["eachCell"]({ includeEmpty: true }, function (cell) {
-                var columnLength = cell.value ? cell.value.toString().length + 2 : 10;
-                if (columnLength > maxLength) { maxLength = columnLength; }
-            });
-            column.width = maxLength + 2;
-        });
-        sheet.eachRow({ includeEmpty: true }, function (row) {
-            row.eachCell({ includeEmpty: true }, function (cell) {
-                cell.border = borderStyles;
-            });
-        });
-        wb.xlsx.writeBuffer().then(data => {
-            const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset-UTF-8' });
-            const url = window.URL.createObjectURL(blob);
-            const anchor = document.createElement('a');
-            anchor.href = url;
-            anchor.download = `Enquiries - ${moment(new Date()).format('DD-MM-YYYY HH:mm:ss')}.xlsx`;
-            anchor.click();
-            window.URL.revokeObjectURL(url);
-        });
-    };
     const status = (rowData) => {
         return <Badge value={rowData.status} severity={rowData.status === 'Open' ? 'success' : 'danger'}></Badge>
     };
@@ -230,7 +151,6 @@ const Enquiries = () => {
                 <Toast ref={toast} />
                 <ConfirmDialog />
                 <Button icon="pi pi-eye" severity="primary" className="mr-1 w-auto h-auto" tooltip="View Enquiries" tooltipOptions={{ position: 'top' }} text onClick={() => router.push(`/pages/enquiries/${rowData.id}`)} />
-                {/* <Button icon="pi pi-trash" severity="danger" className="ml-1 w-auto h-auto" tooltip="Delete Admin" tooltipOptions={{ position: 'top' }} text onClick={() => confirm(rowData.id)} /> */}
             </>
         )
     };
@@ -304,7 +224,7 @@ const Enquiries = () => {
         }
     };
 
-   
+
     return (
         <>
             <DataTable
@@ -314,7 +234,6 @@ const Enquiries = () => {
                 rowsPerPageOptions={[5, 10, 25, 50]}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Enquiries"
-
                 dataKey="id" value={userList} sortMode="multiple" removableSort
                 ref={dt} selectionMode="checkbox" selection={selectedList} onSelectionChange={(e) => setSelectedList(e.value)}
             >
