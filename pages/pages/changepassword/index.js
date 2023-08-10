@@ -36,7 +36,8 @@ useEffect(() => {
 }, [])
 
 // Mobile no validation
-const postUser = async() => {
+const postUser = async(e) => {
+    e.preventDefault();
     if(mobile_number && mobile_number.length ==10){
        await axios.post(`${process.env.API_URL}/verify`, { tableName: "nac_cms_vendor", mobile_number:mobile_number},{headers:{'x-api-key':process.env.API_KEY }})
     .then(res => {
@@ -94,7 +95,7 @@ const postpassword = async(e) => {
        await axios.post(`${process.env.API_URL}/change_password`, {session:getSession(),  request:change_password}, {headers:{'x-api-key':process.env.API_KEY }})
         .then(res => {        
         console.log(res.data);
-        router.push("/dashboard");
+        router.push("/indexDesign");
         }
         )
         .catch(err=>{
@@ -133,9 +134,9 @@ const postpassword = async(e) => {
 
             {Otp_vefiy ?<div className="col-12">
                 <div className="card">
-                    <h5>Enter Your OTP</h5>
-                    <div className="p-fluid formgrid grid">
-                        <div className="field col-2">
+                    <h5 style={{"text-align":"center"}}>Enter Your OTP</h5>
+                    <div className="p-fluid formgrid grid justify-content-center">
+                        <div className="field col-4">
                         <InputText
                                 type="text"
                                 id="contactpersonNo"
@@ -148,7 +149,7 @@ const postpassword = async(e) => {
                                 placeholder='****'
                             />
                         </div>
-                        <div className="field col-12 md:col-12 tex mt-2" style={{"text-align": "right;"}}>
+                        <div className="field col-12 md:col-12 tex mt-2" style={{"text-align":"center"}}>
                         <Button label="Verify" icon="pi pi-lock" className="p-button p-component w-2" onClick={check_otp}></Button>
                         </div>
                         <lable className="ml-2 text-red-600">{mobile_validate}</lable>
