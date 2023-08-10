@@ -137,15 +137,20 @@ export default function o() {
             let _invoice = { ...invoice };
             if (invoice.invoiceidcre) {
                 const index = findIndexById(invoice.invoiceidcre);
-
-
-            } else {
-                _invoice.invoiceidcre = createId();
-                _invoice.duedate = createId();
-                _invoice.amount = '';
-                _invoice.invoice = '';
+            } 
+            else if(invoice.duedate){
+                const index = findIndexById(invoice.duedate);
+            }
+            else if(invoice.amount){
+                const index = findIndexById(invoice.amount);
+            }
+            else if(invoice.invoice){
+                const index = findIndexById(invoice.invoice);
+            }
+            else {
+            
                 _invoice.push(_invoice);
-                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Invoice Created', life: 3000 });
             }
 
 
@@ -286,27 +291,27 @@ export default function o() {
 
                         <div className="field">
                             <label htmlFor="invoiceidcre">Invoice No.</label>
-                            <InputText id="invoiceidcre"  onChange={(e) => onInputChange(e, 'invoiceidcre')} required autoFocus  />
+                            <InputText id="invoiceidcre"  onValueChange={(e) => onInputChange(e, 'invoiceidcre')}  />
                             {submitted && !invoice.invoiceidcre && <small className="p-invalid">Invoice No. is required.</small>}
                         </div>
                         <div className="field">
                             <label htmlFor="duedate">Due Date</label>
-                            <Calendar inputId="calendar" id="duedate" required showIcon></Calendar>
+                            <Calendar inputId="calendar" id="duedate" onValueChange={(e) => onInputChange(e, 'duedate')} showIcon></Calendar>
                             {submitted && !invoice.calendar && <small className="p-invalid">Due Date is required.</small>}
                         </div>
                         <div className="formgrid grid">
                             <div className="field col">
                                 <label htmlFor="amount">Amount</label>
-                                <InputNumber id="amount"  onValueChange={(e) => onInputNumberChange(e, 'amount')} mode="currency" currency="INR" locale="en-INDIA" required />
+                                <InputNumber id="amount"  onValueChange={(e) => onInputNumberChange(e, 'amount')} mode="currency" currency="INR" locale="en-INDIA" />
                                 {submitted && !invoice.amount && <small className="p-invalid">Amount is required.</small>}
                             </div>
                         </div>
                         <div className="formgrid grid">
-                            <label htmlFor="invoice" className="col-fixed w-9rem">
+                            <label htmlFor="invoice" id="invoice" className="col-fixed w-9rem">
                                 Upload Invoice:
                             </label>
                             {/* <FileUpload mode="basic" accept="application/pdf" id="invoice" maxFileSize={1000000} label="Upload" chooseLabel="Upload" customUpload uploadHandler={customBase64Uploader} className="mr-2 inline-block" />                             */}
-                            <FileUpload name="demo[]" url={'/api/upload'} accept="application/pdf"  maxFileSize={1000000} />
+                            <FileUpload name="demo[]" url={'/api/upload'} accept="application/pdf"  onValueChange={(e) => onInputChange(e, 'invoice')}  maxFileSize={1000000} />
                         </div>
 
                 </Dialog>
@@ -349,7 +354,7 @@ export default function o() {
             <DataTable
                 tableStyle={{ width: '100%' }} className='mb-4 datatable-responsive' scrollHeight="430px" size='small' scrollable showGridlines stripedRows paginator
                 header={headerTemplate}
-                dataKey="id" value={paymentList} rows={10} sortMode="multiple" removableSort
+                dataKey="id" value={paymentList} rows={10} sortMode="multiple" removableSort                
                 rowsPerPageOptions={[5, 10, 25, 50]}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Payments"
