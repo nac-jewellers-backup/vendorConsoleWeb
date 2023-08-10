@@ -29,7 +29,9 @@ const LoginPage = () => {
         setDisable(false);
         const { mobile_number, password } = login;
         if (!mobile_number) { setErr('Enter the mobile number!') }
+        else if(mobile_number.length !== 10 ){setErr('Enter valid mobile number!')}
         else if (!password) { setErr('Enter the password') }
+        else if (password.length !==8) { setErr('Enter valid password') }
         else {
             setDisable(true);
             await axios.post(`${process.env.API_URL}/login`, login, { headers: { 'x-api-key': process.env.API_KEY } }).then((response) => {
